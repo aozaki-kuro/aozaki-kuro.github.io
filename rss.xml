@@ -23,7 +23,7 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Sat, 08 Aug 2020 19:23:07 &#43;0800</lastBuildDate>
+        <lastBuildDate>Sat, 08 Aug 2020 19:57:53 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://aozaki-kuro.com/rss.xml" />
         
@@ -59,9 +59,9 @@
 &lt;p&gt;北院由于没有能力进行急诊心外科体外循环手术，告知患者家属病情危重及无法在北院进行手术后，决定签字后转院回当时确诊的医院。&lt;/p&gt;
 &lt;h2 id=&#34;顺利毕业&#34;&gt;顺利毕业&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0002.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;总之还是完成了3年的轮转，拿到了学位证、学历证、医师执照、轮转证，顺利达成四证合一的目标。还努力考上了博士，集齐了三张入学通知书。&lt;/p&gt;
+&lt;p&gt;尽管有诸多的不如意和心惊胆战的时刻，总算还是完成了3年的轮转，拿到了学位证、学历证、医师执照、轮转证，顺利达成四证合一的目标。还努力考上了博士，集齐了三张入学通知书。&lt;/p&gt;
 &lt;p&gt;接下来就是面对博士生涯，还有今后的职业规划了。&lt;/p&gt;
-&lt;p&gt;……一个火坑到另一个火坑。&lt;/p&gt;</description>
+&lt;p&gt;……一个火坑到另一个火坑，希望博士能顺利完成吧。&lt;/p&gt;</description>
                 
                 
                 
@@ -104,10 +104,8 @@
 &lt;h4 id=&#34;反复报错&#34;&gt;反复报错&lt;/h4&gt;
 &lt;p&gt;最开始听说Hugo轻量化且不需要那么多依赖，于是便想着往Hugo迁移。当然折腾上手后才发现踩坑的点太多了。&lt;/p&gt;
 &lt;p&gt;首先是遇到了本地编译预览正常，Git Push后完全不正常。排查几次后发现报错如下：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Failed to find a valid digest in the &#39;integrity&#39; attribute for resource &#39;xxxxxxx.css&#39; with computed SHA-256 integrity. The resource has been blocked.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;查了多方资料后发现有怀疑CRLF和LF之间问题的，也有说可以把integrity属性删除即正常的。但是执行后均没有效果。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Failed to find a valid digest in the &#39;integrity&#39; attribute for resource &#39;xxxxxxx.css&#39; with computed SHA-256 integrity. The resource has been blocked.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;查了多方资料后发现有怀疑CRLF和LF之间问题的，也有说可以把integrity属性删除即正常的。但是执行后均没有效果。&lt;/p&gt;
 &lt;p&gt;非常诡异的是，老马在Manjaro下生成的网页git push后是正常的，可以正常加载CSS，Windows下无论如何都不正常。随后在老马指导下应用WSL以及git bash对网页进行再次生成，上传后仍然报CSS错误。问题排查困难重重，遂断了迁移至Hugo的念想。&lt;/p&gt;
 &lt;h4 id=&#34;部署操作麻烦&#34;&gt;部署操作麻烦&lt;/h4&gt;
 &lt;p&gt;除了难以排查的CSS问题，由于我的coding基础薄弱，Hugo部署时的命令行数量也让我头疼。&lt;/p&gt;
@@ -119,8 +117,13 @@ git commit -am &amp;quot;Update&amp;quot;
 git push
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个是我部署Hugo时需要输入的命令行，难记且涉及根目录及public/两个目录层级。而Hexo则优雅得多：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;hexo g &amp;amp;&amp;amp; hexo d
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;即可完成在服务端的部署。在反复折腾几轮后遂决定滚回Hexo方案。&lt;/p&gt;
-&lt;p&gt;而且建立博客的初衷还是写点东西下来你说是不是。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;即可完成在服务端的部署。在反复折腾几轮后遂决定 &lt;del&gt;滚回Hexo方案&lt;/del&gt; 在WSL的生成速度面前我又滚回来了。&lt;/p&gt;
+&lt;h4 id=&#34;update-08-08&#34;&gt;Update 08-08&lt;/h4&gt;
+&lt;p&gt;考虑到原先出问题的环节是CRLF/LF的历史遗留问题，于是在老马的指导下把WSL环境部署了起来。&lt;/p&gt;
+&lt;p&gt;再次编译后，Hugo生成的CSS样式至少是对了，但是文章列表不能读取。找了一下原因，发现竟然是大小写问题…遂将所有大小写统一为小写，再次git push后正常。&lt;/p&gt;
+&lt;p&gt;不得不吐槽的是，Hugo确实轻量化了，但是坑也未免太大了……除了换行符的坑，还有大小写的坑，Hexo在生成时就可以直接解决CRLF/LF转换的问题，大小写也能顺利识别…………………………&lt;/p&gt;
+&lt;p&gt;看在MemE这个颜值高还不容易撞车的主题面上饶了你了。&lt;/p&gt;
+&lt;p&gt;当然还是那句话，而且建立博客的初衷还是写点东西下来你说是不是。&lt;/p&gt;
 &lt;h2 id=&#34;博客迷思&#34;&gt;博客迷思&lt;/h2&gt;
 &lt;p&gt;其实很久以前就用过博客（fc2、Wordpress、新浪博客 etc.），后来也经营过Lofter，不过除了Lofter以外都不算长久。fc2和Wordpress先后被墙，曾经用GoAgent、红杏等等想办法上去，但是最终因为线路问题难以为继。此外当时是高中，很难有时间持续写博客。即便是大学后开始经营的Lofter也遇到了很多麻烦。最初Lofter在Evan设想下是作为高品位的摄影社区推出的，后来因为Evan调走，新的社区运营把Lofter变成了二次元同人社区，原来的摄影社区氛围无以为继，便纷纷退出了。&lt;/p&gt;
 &lt;p&gt;顺带当时所在的摄影社团叫Chihato，主要组成人员实际上都是专业的摄影师。我这样玩票的进去也是非常意外了。&lt;/p&gt;
