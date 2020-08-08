@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
     <title type="text">Aozaki&#39;s Note</title>
     <subtitle type="html">MemE 是一个强大且可高度定制的 GoHugo 博客主题，专为个人博客设计。</subtitle>
-    <updated>2020-08-08T19:57:53&#43;08:00</updated>
+    <updated>2020-08-08T20:15:59&#43;08:00</updated>
     <id>https://aozaki-kuro.com/</id>
     <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/" />
     <link rel="self" type="application/atom&#43;xml" href="https://aozaki-kuro.com/atom.xml" />
@@ -20,7 +20,7 @@
             <title type="text">毕业了</title>
             <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/" />
             <id>https://aozaki-kuro.com/posts/2020-08-07-master-graduation/</id>
-            <updated>2020-08-08T19:57:39&#43;08:00</updated>
+            <updated>2020-08-08T20:02:45&#43;08:00</updated>
             <published>2020-08-07T21:18:14&#43;00:00</published>
             <author>
                     <name>Aozaki Kuro</name>
@@ -79,7 +79,7 @@
             <title type="text">新博客的折腾与迷思</title>
             <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/" />
             <id>https://aozaki-kuro.com/posts/2020-08-05-why-blogging/</id>
-            <updated>2020-08-08T19:57:40&#43;08:00</updated>
+            <updated>2020-08-08T20:15:51&#43;08:00</updated>
             <published>2020-08-05T15:55:19&#43;08:00</published>
             <author>
                     <name>Aozaki Kuro</name>
