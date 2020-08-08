@@ -23,7 +23,7 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Sat, 08 Aug 2020 23:58:29 &#43;0800</lastBuildDate>
+        <lastBuildDate>Sun, 09 Aug 2020 00:17:19 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://aozaki-kuro.com/rss.xml" />
         
@@ -105,22 +105,41 @@
 &lt;p&gt;最开始听说Hugo轻量化且不需要那么多依赖，于是便想着往Hugo迁移。当然折腾上手后才发现踩坑的点太多了。&lt;/p&gt;
 &lt;p&gt;首先是遇到了本地编译预览正常，Git Push后完全不正常。排查几次后发现报错如下：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Failed to find a valid digest in the &#39;integrity&#39; attribute for resource &#39;xxxxxxx.css&#39; with computed SHA-256 integrity. The resource has been blocked.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;查了多方资料后发现有怀疑CRLF和LF之间问题的，也有说可以把integrity属性删除即正常的。但是执行后均没有效果。&lt;/p&gt;
-&lt;p&gt;非常诡异的是，老马在Manjaro下生成的网页git push后是正常的，可以正常加载CSS，Windows下无论如何都不正常。随后在老马指导下应用WSL以及git bash对网页进行再次生成，上传后仍然报CSS错误。问题排查困难重重，遂断了迁移至Hugo的念想。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;查了多方资料后发现有怀疑CRLF和LF之间问题的，也有说可以把&lt;code&gt;integrity&lt;/code&gt;属性删除即正常的。但是执行后均没有效果。&lt;/p&gt;
+&lt;p&gt;非常诡异的是，老马在Manjaro下生成的网页&lt;code&gt;git push&lt;/code&gt;后是正常的，可以正常加载CSS，Windows下无论如何都不正常。随后在老马指导下应用WSL以及&lt;code&gt;git bash&lt;/code&gt;对网页进行再次生成，上传后仍然报CSS错误。问题排查困难重重，遂断了迁移至Hugo的念想。&lt;/p&gt;
 &lt;h4 id=&#34;部署操作麻烦&#34;&gt;部署操作麻烦&lt;/h4&gt;
 &lt;p&gt;除了难以排查的CSS问题，由于我的coding基础薄弱，Hugo部署时的命令行数量也让我头疼。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hugo --gc -e production --cleanDestinationDir
-cd public
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;hugo --gc -e production --cleanDestinationDir
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; public
 git add .
 git status
-git commit -am &amp;quot;Update&amp;quot;
+git commit -am &lt;span class=&#34;s2&#34;&gt;&amp;#34;Update&amp;#34;&lt;/span&gt;
 git push
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个是我部署Hugo时需要输入的命令行，难记且涉及根目录及public/两个目录层级。而Hexo则优雅得多：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;hexo g &amp;amp;&amp;amp; hexo d
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;即可完成在服务端的部署。在反复折腾几轮后遂决定 &lt;del&gt;滚回Hexo方案&lt;/del&gt; 在WSL的生成速度面前我又滚回来了。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这个是我部署Hugo时需要输入的命令行，难记且涉及根目录及&lt;code&gt;public/&lt;/code&gt;两个目录层级。而Hexo则优雅得多：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;hexo g &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; hexo d
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;即可完成在服务端的部署。在反复折腾几轮后遂决定 &lt;del&gt;滚回Hexo方案&lt;/del&gt; 在WSL的生成速度面前我又滚回来了。&lt;/p&gt;
 &lt;h4 id=&#34;update-08-08&#34;&gt;Update 08-08&lt;/h4&gt;
 &lt;p&gt;考虑到原先出问题的环节是CRLF/LF的历史遗留问题，于是在老马的指导下把WSL环境部署了起来。&lt;/p&gt;
-&lt;p&gt;再次编译后，Hugo生成的CSS样式至少是对了，但是文章列表不能读取。找了一下原因，发现竟然是大小写问题…遂将所有大小写统一为小写，再次git push后正常。&lt;/p&gt;
+&lt;p&gt;再次编译后，Hugo生成的CSS样式至少是对了，但是文章列表不能读取。找了一下原因，发现竟然是大小写问题…遂将所有大小写统一为小写，再次&lt;code&gt;git push&lt;/code&gt;后正常。&lt;/p&gt;
 &lt;p&gt;不得不吐槽的是，Hugo确实轻量化了，但是坑也未免太大了……除了换行符的坑，还有大小写的坑，Hexo在生成时就可以直接解决CRLF/LF转换的问题，大小写也能顺利识别…………………………&lt;/p&gt;
 &lt;p&gt;看在MemE这个颜值高还不容易撞车的主题面上饶了你了。&lt;/p&gt;
 &lt;p&gt;当然还是那句话，而且建立博客的初衷还是写点东西下来你说是不是。&lt;/p&gt;
