@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Sun, 09 Aug 2020 12:42:20 +0800</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>Hugo部署方法与相关踩坑记</title><link>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</guid><pubDate>Sun, 09 Aug 2020 11:29:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Sun, 09 Aug 2020 12:55:43 +0800</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>Hugo部署方法与相关踩坑记</title><link>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</guid><pubDate>Sun, 09 Aug 2020 11:29:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
 &lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>
 &lt;hr>
 &lt;h2 id="wsl2的部署">WSL2的部署&lt;/h2>
@@ -51,7 +51,7 @@
 &lt;/span>&lt;span class="lnt">5
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="nb">cd&lt;/span> /tmp
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="nb">cd&lt;/span> /tmp
 wget https://github.com/gohugoio/hugo/releases/download/v0.74.3/hugo_0.74.3_Linux-32bit.tar.gz
 tar xvf hugo_0.74.3_Linux-32bit.tar.gz
 sudo mv hugo /usr/local/bin
@@ -68,7 +68,7 @@ hugo
 &lt;/span>&lt;span class="lnt">2
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">hugo new site blog &lt;span class="c1">#这里填入自己的博客根目录名称&lt;/span>
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">hugo new site blog &lt;span class="c1">#这里填入自己的博客根目录名称&lt;/span>
 &lt;span class="nb">cd&lt;/span> blog
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
@@ -80,7 +80,7 @@ hugo
 &lt;/span>&lt;span class="lnt">3
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">git init
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">git init
 git submodule add --depth &lt;span class="m">1&lt;/span> https://github.com/reuixiy/hugo-theme-meme.git themes/meme
 rm config.toml &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> cp themes/meme/config-examples/zh-cn/config.toml config.toml &lt;span class="c1">#将config.toml替换为主题用&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
@@ -92,7 +92,7 @@ rm config.toml &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> cp themes/meme/co
 &lt;/span>&lt;span class="lnt">2
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">hugo new &lt;span class="s2">&amp;#34;posts/hello-world.md&amp;#34;&lt;/span>
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">hugo new &lt;span class="s2">&amp;#34;posts/hello-world.md&amp;#34;&lt;/span>
 hugo new &lt;span class="s2">&amp;#34;about/_index.md&amp;#34;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
@@ -102,7 +102,7 @@ hugo new &lt;span class="s2">&amp;#34;about/_index.md&amp;#34;&lt;/span>
 &lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">hugo server -D
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">hugo server -D
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h4 id="连接至ssh">连接至SSH&lt;/h4>
@@ -112,7 +112,7 @@ hugo new &lt;span class="s2">&amp;#34;about/_index.md&amp;#34;&lt;/span>
 &lt;/span>&lt;span class="lnt">2
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">ssh-keygen -tecdsa &lt;span class="c1">#创建sshkey，可以看到一个谜之ASCII图片&lt;/span>
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">ssh-keygen -tecdsa &lt;span class="c1">#创建sshkey，可以看到一个谜之ASCII图片&lt;/span>
 cat ~/.ssh/id_ecdsa.pub &lt;span class="c1">#查看公钥，复制后添加至Github&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
@@ -122,7 +122,7 @@ cat ~/.ssh/id_ecdsa.pub &lt;span class="c1">#查看公钥，复制后添加至Gi
 &lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">git remote set-url origin git@github.com:xxxxxxx &lt;span class="c1">#此处修改为自己项目主页的ssh地址&lt;/span>
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">git remote set-url origin git@github.com:xxxxxxx &lt;span class="c1">#此处修改为自己项目主页的ssh地址&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>在添加过origin后如下操作：&lt;/p>
@@ -136,7 +136,7 @@ cat ~/.ssh/id_ecdsa.pub &lt;span class="c1">#查看公钥，复制后添加至Gi
 &lt;/span>&lt;span class="lnt">6
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">hugo --gc -e production --cleanDestinationDir &lt;span class="c1">#这里在博客根目录下执行&lt;/span>
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">hugo --gc --minify &lt;span class="c1">#这里在博客根目录下执行&lt;/span>
 &lt;span class="nb">cd&lt;/span> public
 git add .
 git status
@@ -144,7 +144,8 @@ git commit -m &lt;span class="s2">&amp;#34;Update&amp;#34;&lt;/span> &lt;span cl
 git push
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;hr>
+&lt;/div>&lt;p>如果博客出现渲染问题，可以改用&lt;code>hugo --gc -e production --cleanDestinationDir&lt;/code>进行重构。&lt;/p>
+&lt;hr>
 &lt;h2 id="踩坑记">踩坑记&lt;/h2>
 &lt;h3 id="css错误的排查">CSS错误的排查&lt;/h3>
 &lt;p>最开始听说Hugo轻量化且不需要那么多依赖，于是便想着往Hugo迁移。当然折腾上手后才发现踩坑的点太多了。&lt;/p>
