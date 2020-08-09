@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Sun, 09 Aug 2020 12:02:28 +0800</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>Hugo部署方法与相关踩坑记</title><link>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</guid><pubDate>Sun, 09 Aug 2020 11:29:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。&lt;/p>
-&lt;p>但是实话实说，Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>
-&lt;h2 id="1-wsl2的部署">1. WSL2的部署&lt;/h2>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Sun, 09 Aug 2020 12:42:20 +0800</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>Hugo部署方法与相关踩坑记</title><link>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</guid><pubDate>Sun, 09 Aug 2020 11:29:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
+&lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>
+&lt;hr>
+&lt;h2 id="wsl2的部署">WSL2的部署&lt;/h2>
 &lt;p>在反复折腾几轮后遂决定 &lt;del>滚回Hexo方案&lt;/del> 在WSL下Hexo的生成速度面前我又滚回来了。&lt;/p>
 &lt;p>以下为操作笔记：&lt;/p>
-&lt;h3 id="11-windows-10内启用相关功能">1.1 Windows 10内启用相关功能&lt;/h3>
+&lt;h3 id="windows-10内启用相关功能">Windows 10内启用相关功能&lt;/h3>
 &lt;p>首先确保Windows 10版本在18917以上，Store内安装Ubuntu后开始WSL2的配置。&lt;/p>
 &lt;p>以管理员权限运行Powershell，并启用虚拟机平台可选组件&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -23,8 +24,8 @@
 &lt;pre class="chroma">&lt;code class="language-Powershell" data-lang="Powershell">&lt;span class="nb">Enable-WindowsOptionalFeature&lt;/span> &lt;span class="n">-Online&lt;/span> &lt;span class="n">-FeatureName&lt;/span> &lt;span class="n">Microsoft-Windows-Subsystem-Linux&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>重启后打开安装的Ubuntu子系统，输入用户名密码，完成WSL1的安装；此时在Powershell内输入&lt;code>wsl -l&lt;/code>可查看安装的版本号（我安装的是Ubuntu 18.04 LTS）。&lt;/p>
-&lt;h3 id="12-转换为wsl2">1.2 转换为WSL2&lt;/h3>
+&lt;/div>&lt;p>&lt;strong>重启后&lt;/strong>打开安装的Ubuntu子系统，输入用户名密码，完成WSL1的安装；此时在Powershell内输入&lt;code>wsl -l&lt;/code>可查看安装的版本号（我安装的是Ubuntu 18.04 LTS）。&lt;/p>
+&lt;h3 id="转换为wsl2">转换为WSL2&lt;/h3>
 &lt;p>首先至Microsoft下载&lt;a href="https://docs.microsoft.com/zh-cn/windows/wsl/wsl2-kernel">Linux Kernel&lt;/a>，安装后方可进行转换。&lt;/p>
 &lt;p>根据&lt;code>wsl -l&lt;/code>获得的版本号，将其转换为WSL2。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -37,8 +38,9 @@
 &lt;/div>
 &lt;/div>&lt;p>之后可以输入&lt;code>wsl --set-default-version 2&lt;/code>，使之后安装的Linux子系统都安装到WSL2中。&lt;/p>
 &lt;p>至此WSL2的部署完成。&lt;/p>
-&lt;h2 id="2-hugo">2. Hugo&lt;/h2>
-&lt;h3 id="21-wsl2内部署hugo">2.1 WSL2内部署Hugo&lt;/h3>
+&lt;hr>
+&lt;h2 id="hugo">Hugo&lt;/h2>
+&lt;h3 id="wsl2内部署hugo">WSL2内部署Hugo&lt;/h3>
 &lt;p>对于老手应该问题不大，我还是记录一下新手的操作防止自己忘记……&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -57,9 +59,8 @@ hugo
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>此处要注意，虽然WSL2是64位的，但好像只能运行32位的程序（未确证）。&lt;/p>
-&lt;h3 id="22-hugo的操作">2.2 Hugo的操作&lt;/h3>
-&lt;h4 id="23-部署至github-pages">2.3 部署至Github Pages&lt;/h4>
-&lt;h5 id="231-创建博客与添加新文章">2.3.1 创建博客与添加新文章&lt;/h5>
+&lt;h3 id="hugo相关操作">Hugo相关操作&lt;/h3>
+&lt;h4 id="创建博客与添加新文章">创建博客与添加新文章&lt;/h4>
 &lt;p>如下命令创建博客&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -104,7 +105,7 @@ hugo new &lt;span class="s2">&amp;#34;about/_index.md&amp;#34;&lt;/span>
 &lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">hugo server -D
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h5 id="232-连接至ssh">2.3.2 连接至SSH&lt;/h5>
+&lt;/div>&lt;h4 id="连接至ssh">连接至SSH&lt;/h4>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
@@ -115,7 +116,7 @@ hugo new &lt;span class="s2">&amp;#34;about/_index.md&amp;#34;&lt;/span>
 cat ~/.ssh/id_ecdsa.pub &lt;span class="c1">#查看公钥，复制后添加至Github&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h5 id="233-推送更新">2.3.3 推送更新&lt;/h5>
+&lt;/div>&lt;h4 id="推送更新">推送更新&lt;/h4>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
@@ -139,30 +140,31 @@ cat ~/.ssh/id_ecdsa.pub &lt;span class="c1">#查看公钥，复制后添加至Gi
 &lt;span class="nb">cd&lt;/span> public
 git add .
 git status
-git commit -m &lt;span class="s2">&amp;#34;Update&amp;#34;&lt;/span>
+git commit -m &lt;span class="s2">&amp;#34;Update&amp;#34;&lt;/span> &lt;span class="c1">#根据需要填写更新名称&lt;/span>
 git push
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;code>git commit -m &amp;quot;xxxx&amp;quot;&lt;/code>时可以根据需要填写更新名称&lt;/p>
-&lt;h2 id="3-踩坑记">3. 踩坑记&lt;/h2>
-&lt;h3 id="31-css错误的排查">3.1 CSS错误的排查&lt;/h3>
+&lt;/div>&lt;hr>
+&lt;h2 id="踩坑记">踩坑记&lt;/h2>
+&lt;h3 id="css错误的排查">CSS错误的排查&lt;/h3>
 &lt;p>最开始听说Hugo轻量化且不需要那么多依赖，于是便想着往Hugo迁移。当然折腾上手后才发现踩坑的点太多了。&lt;/p>
 &lt;p>首先部署在Windows 10下，未使用WSL时，遇到了本地&lt;code>hugo server -D&lt;/code>预览正常，&lt;code>git push&lt;/code>后页面出错的问题。排查几次后发现报错如下：&lt;/p>
 &lt;pre>&lt;code>Failed to find a valid digest in the 'integrity' attribute for resource 'xxxxxxx.css' with computed SHA-256 integrity. The resource has been blocked.
 &lt;/code>&lt;/pre>&lt;p>查了多方资料后发现有怀疑CRLF/LF的问题，也有说可以把&lt;code>integrity&lt;/code>属性删除即正常的。但是根据相关指引执行后均没有效果。&lt;/p>
 &lt;p>此外，老马在Manjaro下生成的网页&lt;code>git push&lt;/code>后是正常的，可以正常加载CSS，Windows下无论通过&lt;code>Powershell&lt;/code>还是&lt;code>Git bash&lt;/code>窗口执行都不正常。问题排查困难重重，暂时断了迁移至Hugo的念想。&lt;/p>
 &lt;p>一直到昨天，尝试性地部署了&lt;code>WSL2&lt;/code>，最终编译才通过，让CSS能够正常加载。&lt;/p>
-&lt;h3 id="32-大小写的识别">3.2 大小写的识别&lt;/h3>
+&lt;h3 id="大小写的识别">大小写的识别&lt;/h3>
 &lt;p>昨天在成功通过Hugo部署后发现了问题：首页可以加载文章，但点进Read More后404。&lt;/p>
 &lt;p>进行多次排查后发现是文章所在文件夹的大小写问题，这一问题在Hexo下未发生，将所有文件改为小写后加载正常。&lt;/p>
-&lt;h3 id="33-部署操作麻烦">3.3 部署操作麻烦&lt;/h3>
+&lt;h3 id="部署操作麻烦">部署操作麻烦&lt;/h3>
 &lt;p>除了难以排查的CSS问题和大小写识别的坑，由于我的coding基础薄弱，Hugo部署时的命令行数量也让我头疼。不仅难记且涉及根目录及&lt;code>public/&lt;/code>两个目录层级。而Hexo则只需要优雅地输入&lt;code>hexo g &amp;amp;&amp;amp; hexo d&lt;/code>即可完成在服务端的部署。&lt;/p>
-&lt;h2 id="4-总结">4. 总结&lt;/h2>
+&lt;hr>
+&lt;h2 id="总结">总结&lt;/h2>
 &lt;p>Hugo尽管只需要下载一个二进制文件即可开始部署和使用，但是在这过程中碰到的坑和解决问题的难度远超Hexo。如果我想不起来用WSL，那可能就完全和Hugo无缘。&lt;/p>
 &lt;p>这方面不得不说Hexo的功能性强得多，编译时自动转换CRLF/LF，并且不受到大小写的影响。除了在WSL下生成网页时真的很慢……&lt;/p>
 &lt;p>看在Hugo有MemE这个颜值高、简洁还不容易撞车的主题面上饶了你了。&lt;/p>
 &lt;p>当然尽管折腾了那么多，建立博客的初衷还是写点东西下来你说是不是。&lt;/p>
-&lt;p>好好写点东西下来吧………………🤯&lt;/p></description></item><item><title>毕业了</title><link>https://aozaki-kuro.com/posts/2020-08-07-master-graduation/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-07-master-graduation/</guid><pubDate>Fri, 07 Aug 2020 21:18:14 +0000</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0001.jpg" alt="">&lt;/p>
+&lt;p>好好写点东西下来吧………………🤯&lt;/p></description><category domain="https://aozaki-kuro.com/categories/%E6%8A%98%E8%85%BE/">折腾</category></item><item><title>毕业了</title><link>https://aozaki-kuro.com/posts/2020-08-07-master-graduation/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-07-master-graduation/</guid><pubDate>Fri, 07 Aug 2020 21:18:14 +0000</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0001.jpg" alt="">&lt;/p>
 &lt;p>总算是毕业了，怎么说呢，准备好从一个火坑到一个火坑。&lt;/p>
 &lt;h2 id="漫长的轮转">漫长的轮转&lt;/h2>
 &lt;p>2017年到2020年一直在临床上轮转，某三甲医院的轮转计划是真的狠，从2017年8月1日到2020年7月31日用了个彻底，市里规定33个月的轮转硬给扩展到了36个月。&lt;/p>
