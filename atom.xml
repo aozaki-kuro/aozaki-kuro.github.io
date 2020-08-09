@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
     <title type="text">Aozaki&#39;s Note</title>
     <subtitle type="html">Aozaki Kuro&#39;s Notes, take it easy.</subtitle>
-    <updated>2020-08-09T13:35:26&#43;08:00</updated>
+    <updated>2020-08-09T13:41:48&#43;08:00</updated>
     <id>https://aozaki-kuro.com/</id>
     <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/" />
     <link rel="self" type="application/atom&#43;xml" href="https://aozaki-kuro.com/atom.xml" />
@@ -20,7 +20,7 @@
             <title type="text">Hugo部署方法与相关踩坑记</title>
             <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/" />
             <id>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</id>
-            <updated>2020-08-09T13:34:38&#43;08:00</updated>
+            <updated>2020-08-09T13:41:41&#43;08:00</updated>
             <published>2020-08-09T11:29:51&#43;08:00</published>
             <author>
                     <name>Aozaki Kuro</name>
@@ -232,6 +232,20 @@ git push
                     
                 
                     
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/" term="折腾" label="折腾" />
+                            
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/tags/%E7%BD%91%E7%BB%9C/" term="网络" label="网络" />
+                            
+                        
+                    
                 
             
         </entry>
@@ -240,7 +254,7 @@ git push
             <title type="text">毕业了</title>
             <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/" />
             <id>https://aozaki-kuro.com/posts/2020-08-07-master-graduation/</id>
-            <updated>2020-08-08T20:02:45&#43;08:00</updated>
+            <updated>2020-08-09T13:41:38&#43;08:00</updated>
             <published>2020-08-07T21:18:14&#43;00:00</published>
             <author>
                     <name>Aozaki Kuro</name>
@@ -291,6 +305,14 @@ git push
                     
                 
                     
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔" />
+                            
+                        
+                    
                 
             
         </entry>
@@ -299,7 +321,7 @@ git push
             <title type="text">新博客的折腾与迷思</title>
             <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/" />
             <id>https://aozaki-kuro.com/posts/2020-08-05-why-blogging/</id>
-            <updated>2020-08-09T13:26:30&#43;08:00</updated>
+            <updated>2020-08-09T13:41:35&#43;08:00</updated>
             <published>2020-08-05T15:55:19&#43;08:00</published>
             <author>
                     <name>Aozaki Kuro</name>
@@ -345,6 +367,14 @@ git push
                         
                     
                 
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔" />
+                            
+                        
                     
                 
             

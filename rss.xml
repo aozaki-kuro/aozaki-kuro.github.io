@@ -23,7 +23,7 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Sun, 09 Aug 2020 13:35:26 &#43;0800</lastBuildDate>
+        <lastBuildDate>Sun, 09 Aug 2020 13:41:48 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://aozaki-kuro.com/rss.xml" />
         
@@ -240,6 +240,20 @@ git push
                         
                     
                         
+                            
+                                
+                                
+                                
+                                    <category domain="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/">折腾</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://aozaki-kuro.com/tags/%E7%BD%91%E7%BB%9C/">网络</category>
+                                
+                            
+                        
                     
                 
             </item>
@@ -295,6 +309,14 @@ git push
                         
                     
                         
+                            
+                                
+                                
+                                
+                                    <category domain="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+                                
+                            
+                        
                     
                 
             </item>
@@ -345,6 +367,14 @@ git push
                             
                         
                     
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/">随笔</category>
+                                
+                            
                         
                     
                 
