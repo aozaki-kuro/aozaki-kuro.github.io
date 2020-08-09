@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
     <title type="text">Aozaki&#39;s Note</title>
     <subtitle type="html">Aozaki Kuro&#39;s Notes, take it easy.</subtitle>
-    <updated>2020-08-09T13:15:41&#43;08:00</updated>
+    <updated>2020-08-09T13:35:26&#43;08:00</updated>
     <id>https://aozaki-kuro.com/</id>
     <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/" />
     <link rel="self" type="application/atom&#43;xml" href="https://aozaki-kuro.com/atom.xml" />
@@ -20,7 +20,7 @@
             <title type="text">Hugo部署方法与相关踩坑记</title>
             <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/" />
             <id>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</id>
-            <updated>2020-08-09T13:14:41&#43;08:00</updated>
+            <updated>2020-08-09T13:34:38&#43;08:00</updated>
             <published>2020-08-09T11:29:51&#43;08:00</published>
             <author>
                     <name>Aozaki Kuro</name>
@@ -37,7 +37,7 @@
 &lt;p&gt;在反复折腾几轮后遂决定 &lt;del&gt;滚回Hexo方案&lt;/del&gt; 在WSL下Hexo的生成速度面前我又滚回来了。&lt;/p&gt;
 &lt;p&gt;以下为操作笔记：&lt;/p&gt;
 &lt;h3 id=&#34;windows-10内启用相关功能&#34;&gt;Windows 10内启用相关功能&lt;/h3&gt;
-&lt;p&gt;首先确保Windows 10版本在18917以上，Store内安装Ubuntu后开始WSL2的配置。&lt;/p&gt;
+&lt;p&gt;首先确保Windows 10版本在18917以上，Store内安装Ubuntu后开始WSL2的配置。&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;以管理员权限运行Powershell，并启用虚拟机平台可选组件&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -56,7 +56,7 @@
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Powershell&#34; data-lang=&#34;Powershell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Enable-WindowsOptionalFeature&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Online&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-FeatureName&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Microsoft-Windows-Subsystem-Linux&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;重启后&lt;/strong&gt;打开安装的Ubuntu子系统，输入用户名密码，完成WSL1的安装；此时在Powershell内输入&lt;code&gt;wsl -l&lt;/code&gt;可查看安装的版本号（我安装的是Ubuntu 18.04 LTS）。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;重启后&lt;/strong&gt;打开安装的Ubuntu子系统，输入用户名密码，完成WSL1的安装；此时在Powershell内输入&lt;code&gt;wsl -l&lt;/code&gt;可查看安装的版本号（我所安装的是Ubuntu 18.04 LTS，则显示&lt;code&gt;Ubuntu-18.04&lt;/code&gt;）。&lt;/p&gt;
 &lt;h3 id=&#34;转换为wsl2&#34;&gt;转换为WSL2&lt;/h3&gt;
 &lt;p&gt;首先至Microsoft下载&lt;a href=&#34;https://docs.microsoft.com/zh-cn/windows/wsl/wsl2-kernel&#34;&gt;Linux Kernel&lt;/a&gt;，安装后方可进行转换。&lt;/p&gt;
 &lt;p&gt;根据&lt;code&gt;wsl -l&lt;/code&gt;获得的版本号，将其转换为WSL2。&lt;/p&gt;
@@ -104,7 +104,7 @@ hugo
 &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; blog
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;新增主题（这里应用的是MemE）&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;新增主题（这里应用的是MemE）&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -196,8 +196,25 @@ git push
 &lt;p&gt;Hugo尽管只需要下载一个二进制文件即可开始部署和使用，但是在这过程中碰到的坑和解决问题的难度远超Hexo。如果我想不起来用WSL，那可能就完全和Hugo无缘。&lt;/p&gt;
 &lt;p&gt;这方面不得不说Hexo的功能性强得多，编译时自动转换CRLF/LF，并且不受到大小写的影响。除了在WSL下生成网页时真的很慢……&lt;/p&gt;
 &lt;p&gt;看在Hugo有MemE这个颜值高、简洁还不容易撞车的主题面上饶了你了。&lt;/p&gt;
+&lt;p&gt;另外题图来自赤井はあと，回顾整个排查过程确实非常生草 &lt;del&gt;以及哭笑不得&lt;/del&gt; 。&lt;/p&gt;
+&lt;br&gt;
+&lt;div align=center&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;フリー素材にどうぞ &lt;a href=&#34;https://t.co/Lq8ozvG1Ti&#34;&gt;pic.twitter.com/Lq8ozvG1Ti&lt;/a&gt;&lt;/p&gt;&amp;mdash; 赤井はあと❤最強アイドル (@akaihaato) &lt;a href=&#34;https://twitter.com/akaihaato/status/1285460148958277633?ref_src=twsrc%5Etfw&#34;&gt;July 21, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;p&gt;当然尽管折腾了那么多，建立博客的初衷还是写点东西下来你说是不是。&lt;/p&gt;
-&lt;p&gt;好好写点东西下来吧………………🤯&lt;/p&gt;</content>
+&lt;p&gt;好好写点东西下来吧………………🤯&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;具体请参照《适用于Linux的Windows子系统安装指南》：https://docs.microsoft.com/zh-cn/windows/wsl/install-win10 &lt;a href=&#34;https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;更多操作及详情，请查看MemE项目主页：https://github.com/reuixiy/hugo-theme-meme/blob/master/README.zh-cn.md &lt;a href=&#34;https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;</content>
             
             
             
@@ -282,7 +299,7 @@ git push
             <title type="text">新博客的折腾与迷思</title>
             <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/" />
             <id>https://aozaki-kuro.com/posts/2020-08-05-why-blogging/</id>
-            <updated>2020-08-09T12:02:07&#43;08:00</updated>
+            <updated>2020-08-09T13:26:30&#43;08:00</updated>
             <published>2020-08-05T15:55:19&#43;08:00</published>
             <author>
                     <name>Aozaki Kuro</name>
