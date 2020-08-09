@@ -23,13 +23,13 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Sun, 09 Aug 2020 19:35:03 &#43;0800</lastBuildDate>
+        <lastBuildDate>Sun, 09 Aug 2020 20:46:31 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://aozaki-kuro.com/rss.xml" />
         
         
             <item>
-                <title>Hugo部署方法与踩坑记</title>
+                <title>Hugo部署与踩坑记</title>
                 <link>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</link>
                 <guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</guid>
                 <pubDate>Sun, 09 Aug 2020 11:29:51 &#43;0800</pubDate>
