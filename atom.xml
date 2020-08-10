@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><title type="text">Aozaki's Note</title><subtitle type="html">Aozaki Kuro's Notes, take it easy.</subtitle><updated>2020-08-10T15:07:58+08:00</updated><id>https://aozaki-kuro.com/</id><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/"/><link rel="self" type="application/atom+xml" href="https://aozaki-kuro.com/atom.xml"/><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><generator uri="https://gohugo.io/" version="0.74.3">Hugo</generator><entry><title type="text">Hugo部署与踩坑记</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/"/><id>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</id><updated>2020-08-10T14:58:33+08:00</updated><published>2020-08-09T11:29:51+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><title type="text">Aozaki's Note</title><subtitle type="html">Aozaki Kuro's Notes, take it easy.</subtitle><updated>2020-08-10T15:36:10+08:00</updated><id>https://aozaki-kuro.com/</id><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/"/><link rel="self" type="application/atom+xml" href="https://aozaki-kuro.com/atom.xml"/><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><generator uri="https://gohugo.io/" version="0.74.3">Hugo</generator><entry><title type="text">Hugo部署与踩坑记</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/"/><id>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</id><updated>2020-08-10T15:23:13+08:00</updated><published>2020-08-09T11:29:51+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
 &lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>……</summary><content type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
 &lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>
 &lt;hr>
@@ -147,7 +147,25 @@ git push
 &lt;/div>
 &lt;/div>&lt;p>如果博客出现渲染问题，可以改用&lt;code>hugo --gc -e production --cleanDestinationDir&lt;/code>进行重构。&lt;/p>
 &lt;h2 id="部署cloudflare-cdn">部署Cloudflare CDN&lt;/h2>
-&lt;p>由于国内CDN均要求备案，粗略看了看备案的冗长过程并想到要在博客底下挂一个&lt;del>又长又丑的&lt;/del>备案号，加之DNSpod的解析服务突然出错（DNSpod你自己说你是第几次了），便下定决心迁移至Cloudflare的&lt;del>降速&lt;/del>CDN上。&lt;/p>
+&lt;p>由于国内CDN均要求备案，粗略看了看备案的冗长过程并想到要在博客底下挂一个&lt;span class="spoiler" >又长又丑的&lt;/span>
+&lt;style>
+.spoiler {
+color: black;
+background-color:black;
+}
+.spoiler:hover{
+color: white;
+}
+&lt;/style>备案号，加之DNSpod的解析服务突然出错（DNSpod你自己说你是第几次了），便下定决心迁移至Cloudflare的&lt;span class="spoiler" >降速&lt;/span>
+&lt;style>
+.spoiler {
+color: black;
+background-color:black;
+}
+.spoiler:hover{
+color: white;
+}
+&lt;/style>CDN上。&lt;/p>
 &lt;h3 id="为何选择cloudflare">为何选择Cloudflare？&lt;/h3>
 &lt;p>原因很简单，Cloudflare的CDN遍布全世界，并且提供号称全球最快的DNS &lt;code>1.1.1.1&lt;/code>、免费的SSL证书，以及号称几乎打不死的DDoS保护，而且最重要的是不需要备案🤣 近期还听说Cloudflare在内地与百度有合作，部署了大量节点，想必访问速度应该是差不到哪里去……吧。&lt;/p>
 &lt;p>配置过程不详述了，我主要参考的是&lt;a href="https://mogeko.me/2019/056/">Mogeko的Cloudflare CDN添加教程&lt;/a>。&lt;/p>
