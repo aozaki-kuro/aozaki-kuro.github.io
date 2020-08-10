@@ -1,300 +1,506 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><title type="text">Aozaki's Note</title><subtitle type="html">Aozaki Kuro's Notes, take it easy.</subtitle><updated>2020-08-10T08:33:11+00:00</updated><id>https://aozaki-kuro.com/</id><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/"/><link rel="self" type="application/atom+xml" href="https://aozaki-kuro.com/atom.xml"/><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><generator uri="https://gohugo.io/" version="0.64.1">Hugo</generator><entry><title type="text">Hugo部署与踩坑记</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/"/><id>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</id><updated>2020-08-10T08:33:10+00:00</updated><published>2020-08-09T11:29:51+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
-&lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>……</summary><content type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
-&lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>
-&lt;hr>
-&lt;h2 id="wsl2的部署">WSL2的部署&lt;/h2>
-&lt;p>在反复折腾几轮后遂决定 &lt;del>滚回Hexo方案&lt;/del> 在WSL下Hexo的生成速度面前我又滚回来了。&lt;/p>
-&lt;p>以下为操作笔记：&lt;/p>
-&lt;h3 id="windows-10内启用相关功能">Windows 10内启用相关功能&lt;/h3>
-&lt;p>首先确保Windows 10版本在18917以上，Store内安装Ubuntu后开始WSL2的配置。&lt;sup id="fnref:1">&lt;a href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
-&lt;p>以管理员权限运行Powershell，并启用虚拟机平台可选组件&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-Powershell" data-lang="Powershell">&lt;span class="nb">Enable-WindowsOptionalFeature&lt;/span> &lt;span class="n">-Online&lt;/span> &lt;span class="n">-FeatureName&lt;/span> &lt;span class="n">VirtualMachinePlatform&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>启用Linux子系统功能&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-Powershell" data-lang="Powershell">&lt;span class="nb">Enable-WindowsOptionalFeature&lt;/span> &lt;span class="n">-Online&lt;/span> &lt;span class="n">-FeatureName&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="n">-Windows&lt;/span>&lt;span class="n">-Subsystem&lt;/span>&lt;span class="n">-Linux&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>&lt;strong>重启后&lt;/strong>打开安装的Ubuntu子系统，输入用户名密码，完成WSL1的安装；此时在Powershell内输入&lt;code>wsl -l&lt;/code>可查看安装的版本号（我所安装的是Ubuntu 18.04 LTS，则显示&lt;code>Ubuntu-18.04&lt;/code>）。&lt;/p>
-&lt;h3 id="转换为wsl2">转换为WSL2&lt;/h3>
-&lt;p>首先至Microsoft下载&lt;a href="https://docs.microsoft.com/zh-cn/windows/wsl/wsl2-kernel">Linux Kernel&lt;/a>，安装后方可进行转换。&lt;/p>
-&lt;p>根据&lt;code>wsl -l&lt;/code>获得的版本号，将其转换为WSL2。&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-Powershell" data-lang="Powershell">&lt;span class="n">wsl&lt;/span> &lt;span class="p">-&lt;/span>&lt;span class="n">-set&lt;/span>&lt;span class="n">-version&lt;/span> &lt;span class="n">Ubuntu&lt;/span>&lt;span class="p">-&lt;/span>&lt;span class="n">18&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">04&lt;/span> &lt;span class="n">2&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>之后可以输入&lt;code>wsl --set-default-version 2&lt;/code>，使之后安装的Linux子系统都安装到WSL2中。&lt;/p>
-&lt;p>至此WSL2的部署完成。&lt;/p>
-&lt;hr>
-&lt;h2 id="hugo">Hugo&lt;/h2>
-&lt;h3 id="wsl2内部署hugo">WSL2内部署Hugo&lt;/h3>
-&lt;p>对于老手应该问题不大，我还是记录一下新手的操作防止自己忘记……&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="nb">cd&lt;/span> /tmp
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
+    <title type="text">Aozaki&#39;s Note</title>
+    <subtitle type="html">Aozaki Kuro&#39;s Notes, take it easy.</subtitle>
+    <updated>2020-08-10T08:35:16&#43;00:00</updated>
+    <id>https://aozaki-kuro.com/</id>
+    <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/" />
+    <link rel="self" type="application/atom&#43;xml" href="https://aozaki-kuro.com/atom.xml" />
+    <author>
+            <name>Aozaki Kuro</name>
+            <uri>https://aozaki-kuro.com/</uri>
+            
+                <email>Aozaki.Kuro@gmail.com</email>
+            </author>
+    <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights>
+    <generator uri="https://gohugo.io/" version="0.64.1">Hugo</generator>
+        <entry>
+            <title type="text">Hugo部署与踩坑记</title>
+            <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/" />
+            <id>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</id>
+            <updated>2020-08-10T08:35:13&#43;00:00</updated>
+            <published>2020-08-09T11:29:51&#43;08:00</published>
+            <author>
+                    <name>Aozaki Kuro</name>
+                    <uri>https://aozaki-kuro.com/</uri>
+                    <email>Aozaki.Kuro@gmail.com</email>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p&gt;……</summary>
+            
+                <content type="html">&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;wsl2的部署&#34;&gt;WSL2的部署&lt;/h2&gt;
+&lt;p&gt;在反复折腾几轮后遂决定 &lt;del&gt;滚回Hexo方案&lt;/del&gt; 在WSL下Hexo的生成速度面前我又滚回来了。&lt;/p&gt;
+&lt;p&gt;以下为操作笔记：&lt;/p&gt;
+&lt;h3 id=&#34;windows-10内启用相关功能&#34;&gt;Windows 10内启用相关功能&lt;/h3&gt;
+&lt;p&gt;首先确保Windows 10版本在18917以上，Store内安装Ubuntu后开始WSL2的配置。&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;以管理员权限运行Powershell，并启用虚拟机平台可选组件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Powershell&#34; data-lang=&#34;Powershell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Enable-WindowsOptionalFeature&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Online&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-FeatureName&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;VirtualMachinePlatform&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;启用Linux子系统功能&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Powershell&#34; data-lang=&#34;Powershell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Enable-WindowsOptionalFeature&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Online&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-FeatureName&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Microsoft&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-Windows&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-Subsystem&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-Linux&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;重启后&lt;/strong&gt;打开安装的Ubuntu子系统，输入用户名密码，完成WSL1的安装；此时在Powershell内输入&lt;code&gt;wsl -l&lt;/code&gt;可查看安装的版本号（我所安装的是Ubuntu 18.04 LTS，则显示&lt;code&gt;Ubuntu-18.04&lt;/code&gt;）。&lt;/p&gt;
+&lt;h3 id=&#34;转换为wsl2&#34;&gt;转换为WSL2&lt;/h3&gt;
+&lt;p&gt;首先至Microsoft下载&lt;a href=&#34;https://docs.microsoft.com/zh-cn/windows/wsl/wsl2-kernel&#34;&gt;Linux Kernel&lt;/a&gt;，安装后方可进行转换。&lt;/p&gt;
+&lt;p&gt;根据&lt;code&gt;wsl -l&lt;/code&gt;获得的版本号，将其转换为WSL2。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Powershell&#34; data-lang=&#34;Powershell&#34;&gt;&lt;span class=&#34;n&#34;&gt;wsl&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-set&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-version&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Ubuntu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;04&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;之后可以输入&lt;code&gt;wsl --set-default-version 2&lt;/code&gt;，使之后安装的Linux子系统都安装到WSL2中。&lt;/p&gt;
+&lt;p&gt;至此WSL2的部署完成。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;hugo&#34;&gt;Hugo&lt;/h2&gt;
+&lt;h3 id=&#34;wsl2内部署hugo&#34;&gt;WSL2内部署Hugo&lt;/h3&gt;
+&lt;p&gt;对于老手应该问题不大，我还是记录一下新手的操作防止自己忘记……&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /tmp
 wget https://github.com/gohugoio/hugo/releases/download/v0.74.3/hugo_0.74.3_Linux-32bit.tar.gz
 tar xvf hugo_0.74.3_Linux-32bit.tar.gz
 sudo mv hugo /usr/local/bin
 hugo
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>此处要注意，虽然WSL2是64位的，但好像只能运行32位的程序（未确证）。&lt;/p>
-&lt;h3 id="hugo相关操作">Hugo相关操作&lt;/h3>
-&lt;h4 id="创建博客与添加新文章">创建博客与添加新文章&lt;/h4>
-&lt;p>如下命令创建博客&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">hugo new site blog &lt;span class="c1">#这里填入自己的博客根目录名称&lt;/span>
-&lt;span class="nb">cd&lt;/span> blog
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>新增主题（这里应用的是MemE）&lt;sup id="fnref:2">&lt;a href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">git init
-git submodule add --depth &lt;span class="m">1&lt;/span> https://github.com/reuixiy/hugo-theme-meme.git themes/meme
-rm config.toml &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> cp themes/meme/config-examples/zh-cn/config.toml config.toml &lt;span class="c1">#将config.toml替换为主题用&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>新建文章与关于页面&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">hugo new &lt;span class="s2">&amp;#34;posts/hello-world.md&amp;#34;&lt;/span>
-hugo new &lt;span class="s2">&amp;#34;about/_index.md&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>运行本地渲染，进行预览&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">hugo server -D
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h4 id="连接至ssh">连接至SSH&lt;/h4>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">ssh-keygen -tecdsa &lt;span class="c1">#创建sshkey，可以看到一个谜之ASCII图片&lt;/span>
-cat ~/.ssh/id_ecdsa.pub &lt;span class="c1">#查看公钥，复制后添加至Github&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h4 id="推送更新">推送更新&lt;/h4>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">git remote set-url origin git@github.com:xxxxxxx &lt;span class="c1">#此处修改为自己项目主页的ssh地址&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>在添加过origin后如下操作：&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">hugo --gc --minify &lt;span class="c1">#这里在博客根目录下执行&lt;/span>
-&lt;span class="nb">cd&lt;/span> public
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此处要注意，虽然WSL2是64位的，但好像只能运行32位的程序（未确证）。&lt;/p&gt;
+&lt;h3 id=&#34;hugo相关操作&#34;&gt;Hugo相关操作&lt;/h3&gt;
+&lt;h4 id=&#34;创建博客与添加新文章&#34;&gt;创建博客与添加新文章&lt;/h4&gt;
+&lt;p&gt;如下命令创建博客&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;hugo new site blog &lt;span class=&#34;c1&#34;&gt;#这里填入自己的博客根目录名称&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; blog
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;新增主题（这里应用的是MemE）&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;git init
+git submodule add --depth &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; https://github.com/reuixiy/hugo-theme-meme.git themes/meme
+rm config.toml &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; cp themes/meme/config-examples/zh-cn/config.toml config.toml &lt;span class=&#34;c1&#34;&gt;#将config.toml替换为主题用&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;新建文章与关于页面&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;hugo new &lt;span class=&#34;s2&#34;&gt;&amp;#34;posts/hello-world.md&amp;#34;&lt;/span&gt;
+hugo new &lt;span class=&#34;s2&#34;&gt;&amp;#34;about/_index.md&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;运行本地渲染，进行预览&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;hugo server -D
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;连接至ssh&#34;&gt;连接至SSH&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;ssh-keygen -tecdsa &lt;span class=&#34;c1&#34;&gt;#创建sshkey，可以看到一个谜之ASCII图片&lt;/span&gt;
+cat ~/.ssh/id_ecdsa.pub &lt;span class=&#34;c1&#34;&gt;#查看公钥，复制后添加至Github&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;推送更新&#34;&gt;推送更新&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;git remote set-url origin git@github.com:xxxxxxx &lt;span class=&#34;c1&#34;&gt;#此处修改为自己项目主页的ssh地址&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在添加过origin后如下操作：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;hugo --gc --minify &lt;span class=&#34;c1&#34;&gt;#这里在博客根目录下执行&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; public
 git add .
 git status
-git commit -m &lt;span class="s2">&amp;#34;Update&amp;#34;&lt;/span> &lt;span class="c1">#根据需要填写更新名称&lt;/span>
+git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;#34;Update&amp;#34;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;#根据需要填写更新名称&lt;/span&gt;
 git push
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>如果博客出现渲染问题，可以改用&lt;code>hugo --gc -e production --cleanDestinationDir&lt;/code>进行重构。&lt;/p>
-&lt;h2 id="部署cloudflare-cdn">部署Cloudflare CDN&lt;/h2>
-&lt;p>由于国内CDN均要求备案，粗略看了看备案的冗长过程并想到要在博客底下挂一个&lt;span class="spoiler" >又长又丑的&lt;/span>
-&lt;style>
-.spoiler {
-color: black;
-background-color:black;
-}
-.spoiler:hover{
-color: white;
-}
-&lt;/style>备案号，加之DNSpod的解析服务突然出错（DNSpod你自己说你是第几次了），便下定决心迁移至Cloudflare的&lt;span class="spoiler" >降速&lt;/span>
-&lt;style>
-.spoiler {
-color: black;
-background-color:black;
-}
-.spoiler:hover{
-color: white;
-}
-&lt;/style>CDN上。&lt;/p>
-&lt;h3 id="为何选择cloudflare">为何选择Cloudflare？&lt;/h3>
-&lt;p>原因很简单，Cloudflare的CDN遍布全世界，并且提供号称全球最快的DNS &lt;code>1.1.1.1&lt;/code>、免费的SSL证书，以及号称几乎打不死的DDoS保护，而且最重要的是不需要备案🤣 近期还听说Cloudflare在内地与百度有合作，部署了大量节点，想必访问速度应该是差不到哪里去……吧。&lt;/p>
-&lt;p>配置过程不详述了，我主要参考的是&lt;a href="https://mogeko.me/2019/056/">Mogeko的Cloudflare CDN添加教程&lt;/a>。&lt;/p>
-&lt;p>部署后的踩坑记录更新在后面。&lt;/p>
-&lt;h2 id="通过github-actions进行自动部署">通过Github Actions进行自动部署&lt;/h2>
-&lt;hr>
-&lt;h2 id="踩坑记">踩坑记&lt;/h2>
-&lt;h3 id="css错误的排查">CSS错误的排查&lt;/h3>
-&lt;p>最开始听说Hugo轻量化且不需要那么多依赖，于是便想着往Hugo迁移。当然折腾上手后才发现踩坑的点太多了。&lt;/p>
-&lt;p>首先部署在Windows 10下，未使用WSL时，遇到了本地&lt;code>hugo server -D&lt;/code>预览正常，&lt;code>git push&lt;/code>后页面出错的问题。排查几次后发现报错如下：&lt;/p>
-&lt;pre>&lt;code>Failed to find a valid digest in the 'integrity' attribute for resource 'xxxxxxx.css' with computed SHA-256 integrity. The resource has been blocked.
-&lt;/code>&lt;/pre>&lt;p>查了多方资料后发现有怀疑CRLF/LF的问题，也有说可以把&lt;code>integrity&lt;/code>属性删除即正常的。但是根据相关指引执行后均没有效果。&lt;/p>
-&lt;p>此外，老马在Manjaro下生成的网页&lt;code>git push&lt;/code>后是正常的，可以正常加载CSS，Windows下无论通过&lt;code>Powershell&lt;/code>还是&lt;code>Git bash&lt;/code>窗口执行都不正常。问题排查困难重重，暂时断了迁移至Hugo的念想。&lt;/p>
-&lt;p>一直到昨天，尝试性地部署了&lt;code>WSL2&lt;/code>，最终编译才通过，让CSS能够正常加载。&lt;/p>
-&lt;h3 id="大小写的识别">大小写的识别&lt;/h3>
-&lt;p>昨天在成功通过Hugo部署后发现了问题：首页可以加载文章，但点进Read More后404。&lt;/p>
-&lt;p>进行多次排查后发现是文章所在文件夹的大小写问题，这一问题在Hexo下未发生，将所有文件改为小写后加载正常。&lt;/p>
-&lt;h3 id="部署操作麻烦">部署操作麻烦&lt;/h3>
-&lt;p>除了难以排查的CSS问题和大小写识别的坑，由于我的coding基础薄弱，Hugo部署时的命令行数量也让我头疼。不仅难记且涉及根目录及&lt;code>public/&lt;/code>两个目录层级。而Hexo则只需要优雅地输入&lt;code>hexo g &amp;amp;&amp;amp; hexo d&lt;/code>即可完成在服务端的部署。&lt;/p>
-&lt;h3 id="cloudflare-cdn部署时的注意事项">Cloudflare CDN部署时的注意事项&lt;/h3>
-&lt;p>由前面的踩坑经验可知，Hugo生成的CSS需要检查完整性，所以尽管Cloudflare提供了Auto Minify功能，但是请千万不要去勾选HTML以外的选项。Auto Minify会导致出现前述的CSS完整性错误，进而使得网页无法加载CSS样式。&lt;/p>
-&lt;hr>
-&lt;h2 id="总结">总结&lt;/h2>
-&lt;p>Hugo尽管只需要下载一个二进制文件即可开始部署和使用，但是在这过程中碰到的坑和解决问题的难度远超Hexo。如果我想不起来用WSL，那可能就完全和Hugo无缘。&lt;/p>
-&lt;p>这方面不得不说Hexo的功能性强得多，编译时自动转换CRLF/LF，并且不受到大小写的影响。除了在WSL下生成网页时真的很慢……&lt;/p>
-&lt;p>看在Hugo有MemE这个颜值高、简洁还不容易撞车的主题面上饶了你了。&lt;/p>
-&lt;p>另外题图来自赤井はあと，回顾整个排查过程确实非常生草 &lt;del>以及哭笑不得&lt;/del> 。&lt;/p>
-&lt;br>
-&lt;div align=center>
-&lt;blockquote class="twitter-tweet">&lt;p lang="ja" dir="ltr">フリー素材にどうぞ &lt;a href="https://t.co/Lq8ozvG1Ti">pic.twitter.com/Lq8ozvG1Ti&lt;/a>&lt;/p>&amp;mdash; 赤井はあと❤最強アイドル (@akaihaato) &lt;a href="https://twitter.com/akaihaato/status/1285460148958277633?ref_src=twsrc%5Etfw">July 21, 2020&lt;/a>&lt;/blockquote> &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8">&lt;/script>
-&lt;/div>
-&lt;hr>
-&lt;p>当然尽管折腾了那么多，建立博客的初衷还是写点东西下来你说是不是。&lt;/p>
-&lt;p>好好写点东西下来吧………………🤯&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
-&lt;p>具体请参照《适用于Linux的Windows子系统安装指南》：https://docs.microsoft.com/zh-cn/windows/wsl/install-win10 &lt;a href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
-&lt;p>更多操作及详情，请查看MemE项目主页：https://github.com/reuixiy/hugo-theme-meme/blob/master/README.zh-cn.md &lt;a href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/section></content><category scheme="https://aozaki-kuro.com/categories/%E6%8A%98%E8%85%BE/" term="折腾" label="折腾"/><category scheme="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/" term="折腾" label="折腾"/><category scheme="https://aozaki-kuro.com/tags/%E7%BD%91%E7%BB%9C/" term="网络" label="网络"/></entry><entry><title type="text">毕业了</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/"/><id>https://aozaki-kuro.com/posts/2020-08-07-master-graduation/</id><updated>2020-08-10T08:33:10+00:00</updated><published>2020-08-07T21:18:14+00:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0001.jpg" alt="">&lt;/p>
-&lt;p>总算是毕业了，怎么说呢，准备好从一个火坑到一个火坑。&lt;/p>……</summary><content type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0001.jpg" alt="">&lt;/p>
-&lt;p>总算是毕业了，怎么说呢，准备好从一个火坑到一个火坑。&lt;/p>
-&lt;h2 id="漫长的轮转">漫长的轮转&lt;/h2>
-&lt;p>2017年到2020年一直在临床上轮转，某三甲医院的轮转计划是真的狠，从2017年8月1日到2020年7月31日用了个彻底，市里规定33个月的轮转硬给扩展到了36个月。&lt;/p>
-&lt;p>算了算各个科室轮转月数，心脏内科（5）、呼吸科（4）、消化科（4）、肾脏内科（2）、内分泌科（2）、麻醉科（2）、急诊科（2+1）、感染科（2）、风湿免疫科（2）、神经内科（2）、高血压科（2）、精神科（2）、血液科（2）、影像科（2）。&lt;/p>
-&lt;p>当然所有临床学的技能、学的知识全靠自己，哪来的老师给你一个个讲过去呢（苦笑）。倒是在很多同学抱怨单调、太累的麻醉科学到了很多东西。除了前两周在普外科房间做麻醉以外，剩下时间都在心外科麻醉台面工作，学习了气管插管、有创动脉监测、深静脉置管、右心漂浮导管置管、固定呼吸机及转运呼吸机的使用、大抢救，等等等等。以至于后面一个科室到ICU时被主任询问是否是外科出身，对不起，我是一个曾经想做外科的心内科医生……&lt;/p>
-&lt;h2 id="疫情">疫情&lt;/h2>
-&lt;p>今年年初还遇上了新冠疫情，要不是疫情最严重2月到3月窝在一个闲得要死的科室把毕业论文写完了，真不知道拿什么来毕业。当时在神经内科等等科室，因为回乡的轮转医生回不来，实习学生和进修医生无法来沪，于是我们这些最后坚守的轮转医生们每3-4日就是一个值班，忙得非常刻骨铭心了。&lt;/p>
-&lt;p>还有支援门急诊时都需要穿戴非常厚重的防护服，这对于我一个容易出汗的人来说简直是灾难，每天脱下来的衣服里全都是水。加之中央空调不能开，于是就得在寒冷和湿透了的内层之间挣扎…………&lt;/p>
-&lt;p>希望疫情能尽早结束。&lt;/p>
-&lt;h2 id="挺多破事">挺多破事&lt;/h2>
-&lt;p>轮转期间当然接触的最多的还是病人，现在医患关系那么紧张，挑一个讲讲吧。&lt;/p>
-&lt;p>当时在北院急诊台面轮转，从分诊台送来一个中年男性病人（以及好几个家属）。家属张口就是要给病人吸痰。&lt;/p>
-&lt;p>观察患者捂胸口，大汗淋漓，有咳嗽，呼吸急促，但尚不能确定问题所在。遂嘱平卧至检查床上，测量生命体征。单侧血压86/45 mmHg，对侧122/74 mmHg，四肢厥冷，单侧脉搏细弱，对侧脉搏搏动尚有力。考虑大动脉栓塞或主动脉夹层。&lt;/p>
-&lt;p>追问患者家属既往是否有心梗、主动脉夹层或相关血管疾病，患者家属&lt;strong>矢口否认&lt;/strong>。翻阅门诊病历卡后发现2月前于外院确诊“主动脉夹层”，当时送入心脏外科监护室，由于当时检查考虑DeBakey II/Stanford A型，死亡率极高，建议手术。出于经济原因，患者要求回当地诊治（手术和监护费用粗算约20-40万不等，手术风险也非常高）。谁知患者仍然在沪工作，未回当地手术治疗。&lt;/p>
-&lt;p>当然要拖去做个CT，考虑到患者病情危重，生命体征不稳，于是没有做增强。&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0003.jpg" alt="">&lt;/p>
-&lt;p>如图所示，蓝色箭头为主动脉夹层形成的假腔，由于病程长达2月，夹层已经可见钙化，无需造影剂也可以看见假腔。红色箭头是主动脉夹层破口，同样由于病程长达2月，加之血管条件差，破口反而并不是很大，但已经在往胸腔内出血了。单侧胸腔容积2500mL，人的全身血量也不过4000mL上下，可以解释为何又大汗淋漓及四肢厥冷的外周循环衰竭征象。&lt;/p>
-&lt;p>北院由于没有能力进行急诊心外科体外循环手术，告知患者家属病情危重及无法在北院进行手术后，决定签字后转院回当时确诊的医院。&lt;/p>
-&lt;h2 id="顺利毕业">顺利毕业&lt;/h2>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0002.jpg" alt="">&lt;/p>
-&lt;p>尽管有诸多的不如意和心惊胆战的时刻，总算还是完成了3年的轮转，拿到了学位证、学历证、医师执照、轮转证，顺利达成四证合一的目标。还努力考上了博士，集齐了三张入学通知书。&lt;/p>
-&lt;p>接下来就是面对博士生涯，还有今后的职业规划了。&lt;/p>
-&lt;p>……一个火坑到另一个火坑，希望博士能顺利完成吧。&lt;/p></content><category scheme="https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/><category scheme="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/></entry><entry><title type="text">新博客的折腾与迷思</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/"/><id>https://aozaki-kuro.com/posts/2020-08-05-why-blogging/</id><updated>2020-08-10T08:33:10+00:00</updated><published>2020-08-05T15:55:19+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/0001.jpg" alt="">&lt;/p>
-&lt;p>虽然说昨天就已经顺利建立了Hexo + NexT的博客，并且好不容易动手写完了久违的一篇博客，并且想写下一点点迷思。&lt;/p>……</summary><content type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/0001.jpg" alt="">&lt;/p>
-&lt;p>虽然说昨天就已经顺利建立了Hexo + NexT的博客，并且好不容易动手写完了久违的一篇博客，并且想写下一点点迷思。&lt;/p>
-&lt;h2 id="折腾">折腾&lt;/h2>
-&lt;p>先说折腾吧。因为先前看到了Github Pages可以托管博客，于是在各种因素之下动心，然后间断拖了半个月把博客搭起来了。&lt;/p>
-&lt;p>一开始选择的Hexo，并且选了最大路的NexT主题（功能相当完善），不过在nodejs那巨大的modules面前非常头疼。查了资料后决定转投Hugo，并且在&lt;a href="https://io-oi.me/">reuixiy大佬&lt;/a>的博客发现了MemE这款主题（&lt;a href="https://github.com/reuixiy/hugo-theme-meme">github项目地址&lt;/a>），觉得Hugo轻量化且主题具备我所需要的功能，便在老马的指导下再次折腾了一下午。&lt;/p>
-&lt;p>于是新的博客就这么建好了。&lt;/p>
-&lt;p>08-05 22:40 更新：由于Hugo的奇怪Bug，导致部署后出现各种奇怪的css相关问题，且排查起来毫无头绪，遂决定暂时滚回到Hexo方案。&lt;/p>
-&lt;p>08-08 16:30 更新：通过WSL2解决了Hugo的部署问题，记录了一下相关踩坑记录。&lt;/p>
-&lt;h2 id="博客迷思">博客迷思&lt;/h2>
-&lt;p>其实很久以前就用过博客（fc2、Wordpress、新浪博客 etc.），后来也经营过Lofter，不过除了Lofter以外都不算长久。fc2和Wordpress先后被墙，曾经用GoAgent、红杏等等想办法上去，但是最终因为线路问题难以为继。此外当时是高中，很难有时间持续写博客。即便是大学后开始经营的Lofter也遇到了很多麻烦。最初Lofter在Evan设想下是作为高品位的摄影社区推出的，后来因为Evan调走，新的社区运营把Lofter变成了二次元同人社区，原来的摄影社区氛围无以为继，便纷纷退出了。&lt;/p>
-&lt;p>顺带当时所在的摄影社团叫Chihato，主要组成人员实际上都是专业的摄影师。我这样玩票的进去也是非常意外了。&lt;/p>
-&lt;p>在SNS时代来临后自然是选择了Twitter、Google+、微博、微信朋友圈等进行记录。不必说，对于简体中文内容，大陆的平台看的人最多，传播力最广，作为代价，内容审查是逃不过去的，很多内容不敢也不能发布在国内平台上。而近几年来又要面对全新的一些问题：举报行为盛行。目前作为主流的低龄、低学历网民&lt;sup id="fnref:1">&lt;a href="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>看到不喜欢的内容都要一律举报让它消失。这个习惯的来源牵涉到方方面面，个人层面的党同伐异，以及平台的自我阉割、纵容和推波助澜当然是不可少的要素。&lt;/p>
-&lt;p>很多网民觉得出了微博就是避风港了，其实并不然，内容审查的问题只要是国内的注册公司都是跑不掉的。Lofter也吃下了当年自己种的恶果，目前大量同人作品遭到举报，并且审核力度加大，很多并无出格性描写的文章和图画遭到删除或屏蔽。当年我们都喜欢骂广电总局太过敏感，从人物发色、耳钉唇钉，一直管到意识形态，并且觉得在新一代成长后可以改善这样的问题。现在觉得完全就是想多了——&lt;strong>我们的下一代比我们的上两代还要狠心&lt;/strong>。&lt;/p>
-&lt;p>鉴于目前国内的环境只会越来越差，文艺创作的空间也只会越来越小，自建博客可能是唯一的出路。所以自建博客的需求又回来了——把内容托管到国外VPS/Github Pages上，用轻量化傻瓜化的框架搭建博客，并且可以选择加密博客。最大的风险也就是域名被封。&lt;/p>
-&lt;p>然而就我这两天的折腾经验，Github Pages托管、Hexo/Hugo的部署与调整都是具有门槛的，都需要基本的coding能力，或者需要一位热心的程序员朋友，因此在推广上也产生了难度。&lt;/p>
-&lt;p>但无论如何，人类还是需要书写，需要创作的，希望大家都能找到合适的、安心的写作平台。&lt;/p>
-&lt;h2 id="共勉">共勉&lt;/h2>
-&lt;blockquote>
-&lt;p>&lt;strong>我看见山和大海，也看见潮起潮落。&lt;br>而你只能看见屋内的风景，感叹窗外的美好。&lt;/strong>&lt;/p>
-&lt;/blockquote>
-&lt;section class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
-&lt;p>网民年龄及学历结构，占比最大的群体分别是“15-19岁”以及“初中学历”，详见第45次《中国互联网络发展状况统计报告》：http://www.cac.gov.cn/2020-04/27/c_1589535470378587.htm &lt;a href="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/section></content><category scheme="https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/><category scheme="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/></entry><entry><title type="text">《对马岛之鬼》白金后简评</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/"/><id>https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/</id><updated>2020-08-10T08:33:10+00:00</updated><published>2020-08-04T20:51:02+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0004.jpg" alt="">&lt;/p>
-&lt;p>终于是花了两三周时间把 &lt;del>对蒙忍&lt;/del> 对马岛之鬼白金了。总体非常满意游戏的质量，而且本作可谓是PS4末期的诚意之作，觉得还是有必要稍稍简评。&lt;/p>……</summary><content type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0004.jpg" alt="">&lt;/p>
-&lt;p>终于是花了两三周时间把 &lt;del>对蒙忍&lt;/del> 对马岛之鬼白金了。总体非常满意游戏的质量，而且本作可谓是PS4末期的诚意之作，觉得还是有必要稍稍简评。&lt;/p>
-&lt;h2 id="总体评分9分">总体评分：9分&lt;/h2>
-&lt;h3 id="剧情75分">剧情：7.5分&lt;/h3>
-&lt;p>个人认为不功不过，叙事完整，起承转合都可以接受 &lt;del>至少不会没由头地对着重要人物来一发高尔夫球棒&lt;/del>。从武士到战鬼的缘由、坚持战鬼之道及其后果，都讲得算是比较明确了。简要总结一下就是“一个理想主义者的死亡”，也侧面了反映骑士精神/武士道为何在火枪火炮面前毫无还手之力。&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0002.jpg" alt="鲁莽武士">&lt;/p>
-&lt;p>当然，剧情一股育碧味儿，查阅资料后发现确实是几位从育碧跳槽出来的编剧写的……&lt;/p>
-&lt;p>还有，主线剧情的演出非常精彩，这点后面讲。&lt;/p>
-&lt;h3 id="演出9分">演出：9分&lt;/h3>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0019.jpg" alt="">&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0020.jpg" alt="">&lt;/p>
-&lt;p>这应该是本作最突出的特点了。从一开始就有选项选择黑泽明模式（高对比黑白+噪点），致敬大师和经典武士电影。从主线剧情人物的动作及表情，决斗前拔刀的镜头 &lt;del>还挺西部片的&lt;/del>，再到每个故事开头的定格镜头，总的来说运镜水平以及画质渲染足以暴打大部分游戏了。牛逼疯了。&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0011.jpg" alt="">&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0013.jpg" alt="">&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0015.jpg" alt="">&lt;/p>
-&lt;p>如果想要完整体验GoT的画质和运镜水平，建议用PS4 Pro+4K HDR显示器/电脑玩 &lt;del>或者等上PC体验极致画质&lt;/del>。我只有初代PS4，只能输出1080p，比较可惜。&lt;/p>
-&lt;h3 id="操作7分">操作：7分&lt;/h3>
-&lt;p>操作应该时本游戏的短板，很多细节差点毁掉这款游戏。这并不是说笑，开门时过于贴近导致无法按R2开门、连续暗杀时因为前冲了一步导致判定为重攻击、骑马时对敌方的会心一击难以触发，还有攀登神社时绳钩经常勾不到……这些小毛小病导致在整个Gameplay过程中充满了各种各样的不爽感，如果不是杀阵演出真的很爽很流畅，那我可能会半路弃坑了。&lt;/p>
-&lt;p>在决斗时，挥刀的手感还算是不错的，弹反的判定在装了水神护符后松了很多，然而非常奇怪的是我几乎没用出过完美闪避，经常就变成滚地了……可能还需要多练习吧，普通难度通关基本靠弹反。&lt;/p>
-&lt;h3 id="地图与探索8分">地图与探索：8分&lt;/h3>
-&lt;p>地图分为三个部分，随着收复主要城池开放，没有特别安排空气墙而是编排好地形来阻挡探索。狐狸巢、神社、温泉的分布总体比较合理，几个探索点之间的距离不会太夸张。此外在野外营救到被绑的百姓会逐渐把蒙古据点和占领的镇子标出来，在完成主线前就可以把大部分地图开完。&lt;/p>
-&lt;p>支线任务很多也是从流民营地对话接到的，而且据说是就近刷的，这样的机制也是挺不错的，至少揍到哪儿基本就可以探索到哪儿。&lt;/p>
-&lt;p>唯一比较不满的是探索收益偏低了一些，大部分都是给的资源；任务给的护符大部分都是重复的，仅有稻荷神社的两个护符可以随着探索增长。&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0023.jpg" alt="">&lt;/p>
-&lt;h2 id="部分截图展示">部分截图展示&lt;/h2>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0005.jpg" alt="">&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0006.jpg" alt="">&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0007.jpg" alt="">&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0008.jpg" alt="">&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0009.jpg" alt="">&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0027.jpg" alt="">&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0030.jpg" alt="">&lt;/p>
-&lt;h2 id="鸣谢">鸣谢&lt;/h2>
-&lt;p>感谢老马 (&lt;a href="https://twitter.com/bgm38">twitter: @bgm38&lt;/a>) 全程协助帮忙搭起这个小博客！&lt;/p>
-&lt;p>另，本博客思考再三后决定不开放评论功能，如有疑问请&lt;a href="mailto:aozaki.kuro@gmail.com">邮件联系&lt;/a>。&lt;/p></content><category scheme="https://aozaki-kuro.com/categories/%E6%B8%B8%E6%88%8F/" term="游戏" label="游戏"/><category scheme="https://aozaki-kuro.com/tags/ps4/" term="PS4" label="PS4"/><category scheme="https://aozaki-kuro.com/tags/%E6%B8%B8%E6%88%8F/" term="游戏" label="游戏"/></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果博客出现渲染问题，可以改用&lt;code&gt;hugo --gc -e production --cleanDestinationDir&lt;/code&gt;进行重构。&lt;/p&gt;
+&lt;h2 id=&#34;部署cloudflare-cdn&#34;&gt;部署Cloudflare CDN&lt;/h2&gt;
+&lt;p&gt;由于国内CDN均要求备案，粗略看了看备案的冗长过程并想到要在博客底下挂一个&lt;span class=&#34;spoiler&#34; &gt;又长又丑的&lt;/span&gt;
+
+&lt;style&gt;
+    
+    .spoiler { 
+      color: black; 
+      background-color:black;
+    }
+    .spoiler:hover{
+      color: white;
+    }
+&lt;/style&gt;备案号，加之DNSpod的解析服务突然出错（DNSpod你自己说你是第几次了），便下定决心迁移至Cloudflare的&lt;span class=&#34;spoiler&#34; &gt;降速&lt;/span&gt;
+
+&lt;style&gt;
+    
+    .spoiler { 
+      color: black; 
+      background-color:black;
+    }
+    .spoiler:hover{
+      color: white;
+    }
+&lt;/style&gt;CDN上。&lt;/p&gt;
+&lt;h3 id=&#34;为何选择cloudflare&#34;&gt;为何选择Cloudflare？&lt;/h3&gt;
+&lt;p&gt;原因很简单，Cloudflare的CDN遍布全世界，并且提供号称全球最快的DNS &lt;code&gt;1.1.1.1&lt;/code&gt;、免费的SSL证书，以及号称几乎打不死的DDoS保护，而且最重要的是不需要备案🤣 近期还听说Cloudflare在内地与百度有合作，部署了大量节点，想必访问速度应该是差不到哪里去……吧。&lt;/p&gt;
+&lt;p&gt;配置过程不详述了，我主要参考的是&lt;a href=&#34;https://mogeko.me/2019/056/&#34;&gt;Mogeko的Cloudflare CDN添加教程&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;部署后的踩坑记录更新在后面。&lt;/p&gt;
+&lt;h2 id=&#34;通过github-actions进行自动部署&#34;&gt;通过Github Actions进行自动部署&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;踩坑记&#34;&gt;踩坑记&lt;/h2&gt;
+&lt;h3 id=&#34;css错误的排查&#34;&gt;CSS错误的排查&lt;/h3&gt;
+&lt;p&gt;最开始听说Hugo轻量化且不需要那么多依赖，于是便想着往Hugo迁移。当然折腾上手后才发现踩坑的点太多了。&lt;/p&gt;
+&lt;p&gt;首先部署在Windows 10下，未使用WSL时，遇到了本地&lt;code&gt;hugo server -D&lt;/code&gt;预览正常，&lt;code&gt;git push&lt;/code&gt;后页面出错的问题。排查几次后发现报错如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Failed to find a valid digest in the &#39;integrity&#39; attribute for resource &#39;xxxxxxx.css&#39; with computed SHA-256 integrity. The resource has been blocked.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;查了多方资料后发现有怀疑CRLF/LF的问题，也有说可以把&lt;code&gt;integrity&lt;/code&gt;属性删除即正常的。但是根据相关指引执行后均没有效果。&lt;/p&gt;
+&lt;p&gt;此外，老马在Manjaro下生成的网页&lt;code&gt;git push&lt;/code&gt;后是正常的，可以正常加载CSS，Windows下无论通过&lt;code&gt;Powershell&lt;/code&gt;还是&lt;code&gt;Git bash&lt;/code&gt;窗口执行都不正常。问题排查困难重重，暂时断了迁移至Hugo的念想。&lt;/p&gt;
+&lt;p&gt;一直到昨天，尝试性地部署了&lt;code&gt;WSL2&lt;/code&gt;，最终编译才通过，让CSS能够正常加载。&lt;/p&gt;
+&lt;h3 id=&#34;大小写的识别&#34;&gt;大小写的识别&lt;/h3&gt;
+&lt;p&gt;昨天在成功通过Hugo部署后发现了问题：首页可以加载文章，但点进Read More后404。&lt;/p&gt;
+&lt;p&gt;进行多次排查后发现是文章所在文件夹的大小写问题，这一问题在Hexo下未发生，将所有文件改为小写后加载正常。&lt;/p&gt;
+&lt;h3 id=&#34;部署操作麻烦&#34;&gt;部署操作麻烦&lt;/h3&gt;
+&lt;p&gt;除了难以排查的CSS问题和大小写识别的坑，由于我的coding基础薄弱，Hugo部署时的命令行数量也让我头疼。不仅难记且涉及根目录及&lt;code&gt;public/&lt;/code&gt;两个目录层级。而Hexo则只需要优雅地输入&lt;code&gt;hexo g &amp;amp;&amp;amp; hexo d&lt;/code&gt;即可完成在服务端的部署。&lt;/p&gt;
+&lt;h3 id=&#34;cloudflare-cdn部署时的注意事项&#34;&gt;Cloudflare CDN部署时的注意事项&lt;/h3&gt;
+&lt;p&gt;由前面的踩坑经验可知，Hugo生成的CSS需要检查完整性，所以尽管Cloudflare提供了Auto Minify功能，但是请千万不要去勾选HTML以外的选项。Auto Minify会导致出现前述的CSS完整性错误，进而使得网页无法加载CSS样式。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;Hugo尽管只需要下载一个二进制文件即可开始部署和使用，但是在这过程中碰到的坑和解决问题的难度远超Hexo。如果我想不起来用WSL，那可能就完全和Hugo无缘。&lt;/p&gt;
+&lt;p&gt;这方面不得不说Hexo的功能性强得多，编译时自动转换CRLF/LF，并且不受到大小写的影响。除了在WSL下生成网页时真的很慢……&lt;/p&gt;
+&lt;p&gt;看在Hugo有MemE这个颜值高、简洁还不容易撞车的主题面上饶了你了。&lt;/p&gt;
+&lt;p&gt;另外题图来自赤井はあと，回顾整个排查过程确实非常生草 &lt;del&gt;以及哭笑不得&lt;/del&gt; 。&lt;/p&gt;
+&lt;br&gt;
+&lt;div align=center&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;フリー素材にどうぞ &lt;a href=&#34;https://t.co/Lq8ozvG1Ti&#34;&gt;pic.twitter.com/Lq8ozvG1Ti&lt;/a&gt;&lt;/p&gt;&amp;mdash; 赤井はあと❤最強アイドル (@akaihaato) &lt;a href=&#34;https://twitter.com/akaihaato/status/1285460148958277633?ref_src=twsrc%5Etfw&#34;&gt;July 21, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;p&gt;当然尽管折腾了那么多，建立博客的初衷还是写点东西下来你说是不是。&lt;/p&gt;
+&lt;p&gt;好好写点东西下来吧………………🤯&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;具体请参照《适用于Linux的Windows子系统安装指南》：https://docs.microsoft.com/zh-cn/windows/wsl/install-win10 &lt;a href=&#34;https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;更多操作及详情，请查看MemE项目主页：https://github.com/reuixiy/hugo-theme-meme/blob/master/README.zh-cn.md &lt;a href=&#34;https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;</content>
+            
+            
+            
+            
+            
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/categories/%E6%8A%98%E8%85%BE/" term="折腾" label="折腾" />
+                            
+                        
+                    
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/" term="折腾" label="折腾" />
+                            
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/tags/%E7%BD%91%E7%BB%9C/" term="网络" label="网络" />
+                            
+                        
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">毕业了</title>
+            <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/" />
+            <id>https://aozaki-kuro.com/posts/2020-08-07-master-graduation/</id>
+            <updated>2020-08-10T08:35:13&#43;00:00</updated>
+            <published>2020-08-07T21:18:14&#43;00:00</published>
+            <author>
+                    <name>Aozaki Kuro</name>
+                    <uri>https://aozaki-kuro.com/</uri>
+                    <email>Aozaki.Kuro@gmail.com</email>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0001.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;总算是毕业了，怎么说呢，准备好从一个火坑到一个火坑。&lt;/p&gt;……</summary>
+            
+                <content type="html">&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0001.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;总算是毕业了，怎么说呢，准备好从一个火坑到一个火坑。&lt;/p&gt;
+&lt;h2 id=&#34;漫长的轮转&#34;&gt;漫长的轮转&lt;/h2&gt;
+&lt;p&gt;2017年到2020年一直在临床上轮转，某三甲医院的轮转计划是真的狠，从2017年8月1日到2020年7月31日用了个彻底，市里规定33个月的轮转硬给扩展到了36个月。&lt;/p&gt;
+&lt;p&gt;算了算各个科室轮转月数，心脏内科（5）、呼吸科（4）、消化科（4）、肾脏内科（2）、内分泌科（2）、麻醉科（2）、急诊科（2+1）、感染科（2）、风湿免疫科（2）、神经内科（2）、高血压科（2）、精神科（2）、血液科（2）、影像科（2）。&lt;/p&gt;
+&lt;p&gt;当然所有临床学的技能、学的知识全靠自己，哪来的老师给你一个个讲过去呢（苦笑）。倒是在很多同学抱怨单调、太累的麻醉科学到了很多东西。除了前两周在普外科房间做麻醉以外，剩下时间都在心外科麻醉台面工作，学习了气管插管、有创动脉监测、深静脉置管、右心漂浮导管置管、固定呼吸机及转运呼吸机的使用、大抢救，等等等等。以至于后面一个科室到ICU时被主任询问是否是外科出身，对不起，我是一个曾经想做外科的心内科医生……&lt;/p&gt;
+&lt;h2 id=&#34;疫情&#34;&gt;疫情&lt;/h2&gt;
+&lt;p&gt;今年年初还遇上了新冠疫情，要不是疫情最严重2月到3月窝在一个闲得要死的科室把毕业论文写完了，真不知道拿什么来毕业。当时在神经内科等等科室，因为回乡的轮转医生回不来，实习学生和进修医生无法来沪，于是我们这些最后坚守的轮转医生们每3-4日就是一个值班，忙得非常刻骨铭心了。&lt;/p&gt;
+&lt;p&gt;还有支援门急诊时都需要穿戴非常厚重的防护服，这对于我一个容易出汗的人来说简直是灾难，每天脱下来的衣服里全都是水。加之中央空调不能开，于是就得在寒冷和湿透了的内层之间挣扎…………&lt;/p&gt;
+&lt;p&gt;希望疫情能尽早结束。&lt;/p&gt;
+&lt;h2 id=&#34;挺多破事&#34;&gt;挺多破事&lt;/h2&gt;
+&lt;p&gt;轮转期间当然接触的最多的还是病人，现在医患关系那么紧张，挑一个讲讲吧。&lt;/p&gt;
+&lt;p&gt;当时在北院急诊台面轮转，从分诊台送来一个中年男性病人（以及好几个家属）。家属张口就是要给病人吸痰。&lt;/p&gt;
+&lt;p&gt;观察患者捂胸口，大汗淋漓，有咳嗽，呼吸急促，但尚不能确定问题所在。遂嘱平卧至检查床上，测量生命体征。单侧血压86/45 mmHg，对侧122/74 mmHg，四肢厥冷，单侧脉搏细弱，对侧脉搏搏动尚有力。考虑大动脉栓塞或主动脉夹层。&lt;/p&gt;
+&lt;p&gt;追问患者家属既往是否有心梗、主动脉夹层或相关血管疾病，患者家属&lt;strong&gt;矢口否认&lt;/strong&gt;。翻阅门诊病历卡后发现2月前于外院确诊“主动脉夹层”，当时送入心脏外科监护室，由于当时检查考虑DeBakey II/Stanford A型，死亡率极高，建议手术。出于经济原因，患者要求回当地诊治（手术和监护费用粗算约20-40万不等，手术风险也非常高）。谁知患者仍然在沪工作，未回当地手术治疗。&lt;/p&gt;
+&lt;p&gt;当然要拖去做个CT，考虑到患者病情危重，生命体征不稳，于是没有做增强。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0003.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如图所示，蓝色箭头为主动脉夹层形成的假腔，由于病程长达2月，夹层已经可见钙化，无需造影剂也可以看见假腔。红色箭头是主动脉夹层破口，同样由于病程长达2月，加之血管条件差，破口反而并不是很大，但已经在往胸腔内出血了。单侧胸腔容积2500mL，人的全身血量也不过4000mL上下，可以解释为何又大汗淋漓及四肢厥冷的外周循环衰竭征象。&lt;/p&gt;
+&lt;p&gt;北院由于没有能力进行急诊心外科体外循环手术，告知患者家属病情危重及无法在北院进行手术后，决定签字后转院回当时确诊的医院。&lt;/p&gt;
+&lt;h2 id=&#34;顺利毕业&#34;&gt;顺利毕业&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0002.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;尽管有诸多的不如意和心惊胆战的时刻，总算还是完成了3年的轮转，拿到了学位证、学历证、医师执照、轮转证，顺利达成四证合一的目标。还努力考上了博士，集齐了三张入学通知书。&lt;/p&gt;
+&lt;p&gt;接下来就是面对博士生涯，还有今后的职业规划了。&lt;/p&gt;
+&lt;p&gt;……一个火坑到另一个火坑，希望博士能顺利完成吧。&lt;/p&gt;</content>
+            
+            
+            
+            
+            
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔" />
+                            
+                        
+                    
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔" />
+                            
+                        
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">新博客的折腾与迷思</title>
+            <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/" />
+            <id>https://aozaki-kuro.com/posts/2020-08-05-why-blogging/</id>
+            <updated>2020-08-10T08:35:13&#43;00:00</updated>
+            <published>2020-08-05T15:55:19&#43;08:00</published>
+            <author>
+                    <name>Aozaki Kuro</name>
+                    <uri>https://aozaki-kuro.com/</uri>
+                    <email>Aozaki.Kuro@gmail.com</email>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-05-why-blogging/0001.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;虽然说昨天就已经顺利建立了Hexo + NexT的博客，并且好不容易动手写完了久违的一篇博客，并且想写下一点点迷思。&lt;/p&gt;……</summary>
+            
+                <content type="html">&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-05-why-blogging/0001.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;虽然说昨天就已经顺利建立了Hexo + NexT的博客，并且好不容易动手写完了久违的一篇博客，并且想写下一点点迷思。&lt;/p&gt;
+&lt;h2 id=&#34;折腾&#34;&gt;折腾&lt;/h2&gt;
+&lt;p&gt;先说折腾吧。因为先前看到了Github Pages可以托管博客，于是在各种因素之下动心，然后间断拖了半个月把博客搭起来了。&lt;/p&gt;
+&lt;p&gt;一开始选择的Hexo，并且选了最大路的NexT主题（功能相当完善），不过在nodejs那巨大的modules面前非常头疼。查了资料后决定转投Hugo，并且在&lt;a href=&#34;https://io-oi.me/&#34;&gt;reuixiy大佬&lt;/a&gt;的博客发现了MemE这款主题（&lt;a href=&#34;https://github.com/reuixiy/hugo-theme-meme&#34;&gt;github项目地址&lt;/a&gt;），觉得Hugo轻量化且主题具备我所需要的功能，便在老马的指导下再次折腾了一下午。&lt;/p&gt;
+&lt;p&gt;于是新的博客就这么建好了。&lt;/p&gt;
+&lt;p&gt;08-05 22:40 更新：由于Hugo的奇怪Bug，导致部署后出现各种奇怪的css相关问题，且排查起来毫无头绪，遂决定暂时滚回到Hexo方案。&lt;/p&gt;
+&lt;p&gt;08-08 16:30 更新：通过WSL2解决了Hugo的部署问题，记录了一下相关踩坑记录。&lt;/p&gt;
+&lt;h2 id=&#34;博客迷思&#34;&gt;博客迷思&lt;/h2&gt;
+&lt;p&gt;其实很久以前就用过博客（fc2、Wordpress、新浪博客 etc.），后来也经营过Lofter，不过除了Lofter以外都不算长久。fc2和Wordpress先后被墙，曾经用GoAgent、红杏等等想办法上去，但是最终因为线路问题难以为继。此外当时是高中，很难有时间持续写博客。即便是大学后开始经营的Lofter也遇到了很多麻烦。最初Lofter在Evan设想下是作为高品位的摄影社区推出的，后来因为Evan调走，新的社区运营把Lofter变成了二次元同人社区，原来的摄影社区氛围无以为继，便纷纷退出了。&lt;/p&gt;
+&lt;p&gt;顺带当时所在的摄影社团叫Chihato，主要组成人员实际上都是专业的摄影师。我这样玩票的进去也是非常意外了。&lt;/p&gt;
+&lt;p&gt;在SNS时代来临后自然是选择了Twitter、Google+、微博、微信朋友圈等进行记录。不必说，对于简体中文内容，大陆的平台看的人最多，传播力最广，作为代价，内容审查是逃不过去的，很多内容不敢也不能发布在国内平台上。而近几年来又要面对全新的一些问题：举报行为盛行。目前作为主流的低龄、低学历网民&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;https://aozaki-kuro.com/posts/2020-08-05-why-blogging/#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;看到不喜欢的内容都要一律举报让它消失。这个习惯的来源牵涉到方方面面，个人层面的党同伐异，以及平台的自我阉割、纵容和推波助澜当然是不可少的要素。&lt;/p&gt;
+&lt;p&gt;很多网民觉得出了微博就是避风港了，其实并不然，内容审查的问题只要是国内的注册公司都是跑不掉的。Lofter也吃下了当年自己种的恶果，目前大量同人作品遭到举报，并且审核力度加大，很多并无出格性描写的文章和图画遭到删除或屏蔽。当年我们都喜欢骂广电总局太过敏感，从人物发色、耳钉唇钉，一直管到意识形态，并且觉得在新一代成长后可以改善这样的问题。现在觉得完全就是想多了——&lt;strong&gt;我们的下一代比我们的上两代还要狠心&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;鉴于目前国内的环境只会越来越差，文艺创作的空间也只会越来越小，自建博客可能是唯一的出路。所以自建博客的需求又回来了——把内容托管到国外VPS/Github Pages上，用轻量化傻瓜化的框架搭建博客，并且可以选择加密博客。最大的风险也就是域名被封。&lt;/p&gt;
+&lt;p&gt;然而就我这两天的折腾经验，Github Pages托管、Hexo/Hugo的部署与调整都是具有门槛的，都需要基本的coding能力，或者需要一位热心的程序员朋友，因此在推广上也产生了难度。&lt;/p&gt;
+&lt;p&gt;但无论如何，人类还是需要书写，需要创作的，希望大家都能找到合适的、安心的写作平台。&lt;/p&gt;
+&lt;h2 id=&#34;共勉&#34;&gt;共勉&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;我看见山和大海，也看见潮起潮落。&lt;br&gt;而你只能看见屋内的风景，感叹窗外的美好。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;网民年龄及学历结构，占比最大的群体分别是“15-19岁”以及“初中学历”，详见第45次《中国互联网络发展状况统计报告》：http://www.cac.gov.cn/2020-04/27/c_1589535470378587.htm &lt;a href=&#34;https://aozaki-kuro.com/posts/2020-08-05-why-blogging/#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;</content>
+            
+            
+            
+            
+            
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔" />
+                            
+                        
+                    
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔" />
+                            
+                        
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">《对马岛之鬼》白金后简评</title>
+            <link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/" />
+            <id>https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/</id>
+            <updated>2020-08-10T08:35:13&#43;00:00</updated>
+            <published>2020-08-04T20:51:02&#43;08:00</published>
+            <author>
+                    <name>Aozaki Kuro</name>
+                    <uri>https://aozaki-kuro.com/</uri>
+                    <email>Aozaki.Kuro@gmail.com</email>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0004.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;终于是花了两三周时间把 &lt;del&gt;对蒙忍&lt;/del&gt; 对马岛之鬼白金了。总体非常满意游戏的质量，而且本作可谓是PS4末期的诚意之作，觉得还是有必要稍稍简评。&lt;/p&gt;……</summary>
+            
+                <content type="html">&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0004.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;终于是花了两三周时间把 &lt;del&gt;对蒙忍&lt;/del&gt; 对马岛之鬼白金了。总体非常满意游戏的质量，而且本作可谓是PS4末期的诚意之作，觉得还是有必要稍稍简评。&lt;/p&gt;
+&lt;h2 id=&#34;总体评分9分&#34;&gt;总体评分：9分&lt;/h2&gt;
+&lt;h3 id=&#34;剧情75分&#34;&gt;剧情：7.5分&lt;/h3&gt;
+&lt;p&gt;个人认为不功不过，叙事完整，起承转合都可以接受 &lt;del&gt;至少不会没由头地对着重要人物来一发高尔夫球棒&lt;/del&gt;。从武士到战鬼的缘由、坚持战鬼之道及其后果，都讲得算是比较明确了。简要总结一下就是“一个理想主义者的死亡”，也侧面了反映骑士精神/武士道为何在火枪火炮面前毫无还手之力。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0002.jpg&#34; alt=&#34;鲁莽武士&#34;&gt;&lt;/p&gt;
+&lt;p&gt;当然，剧情一股育碧味儿，查阅资料后发现确实是几位从育碧跳槽出来的编剧写的……&lt;/p&gt;
+&lt;p&gt;还有，主线剧情的演出非常精彩，这点后面讲。&lt;/p&gt;
+&lt;h3 id=&#34;演出9分&#34;&gt;演出：9分&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0019.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0020.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这应该是本作最突出的特点了。从一开始就有选项选择黑泽明模式（高对比黑白+噪点），致敬大师和经典武士电影。从主线剧情人物的动作及表情，决斗前拔刀的镜头 &lt;del&gt;还挺西部片的&lt;/del&gt;，再到每个故事开头的定格镜头，总的来说运镜水平以及画质渲染足以暴打大部分游戏了。牛逼疯了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0011.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0013.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0015.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如果想要完整体验GoT的画质和运镜水平，建议用PS4 Pro+4K HDR显示器/电脑玩 &lt;del&gt;或者等上PC体验极致画质&lt;/del&gt;。我只有初代PS4，只能输出1080p，比较可惜。&lt;/p&gt;
+&lt;h3 id=&#34;操作7分&#34;&gt;操作：7分&lt;/h3&gt;
+&lt;p&gt;操作应该时本游戏的短板，很多细节差点毁掉这款游戏。这并不是说笑，开门时过于贴近导致无法按R2开门、连续暗杀时因为前冲了一步导致判定为重攻击、骑马时对敌方的会心一击难以触发，还有攀登神社时绳钩经常勾不到……这些小毛小病导致在整个Gameplay过程中充满了各种各样的不爽感，如果不是杀阵演出真的很爽很流畅，那我可能会半路弃坑了。&lt;/p&gt;
+&lt;p&gt;在决斗时，挥刀的手感还算是不错的，弹反的判定在装了水神护符后松了很多，然而非常奇怪的是我几乎没用出过完美闪避，经常就变成滚地了……可能还需要多练习吧，普通难度通关基本靠弹反。&lt;/p&gt;
+&lt;h3 id=&#34;地图与探索8分&#34;&gt;地图与探索：8分&lt;/h3&gt;
+&lt;p&gt;地图分为三个部分，随着收复主要城池开放，没有特别安排空气墙而是编排好地形来阻挡探索。狐狸巢、神社、温泉的分布总体比较合理，几个探索点之间的距离不会太夸张。此外在野外营救到被绑的百姓会逐渐把蒙古据点和占领的镇子标出来，在完成主线前就可以把大部分地图开完。&lt;/p&gt;
+&lt;p&gt;支线任务很多也是从流民营地对话接到的，而且据说是就近刷的，这样的机制也是挺不错的，至少揍到哪儿基本就可以探索到哪儿。&lt;/p&gt;
+&lt;p&gt;唯一比较不满的是探索收益偏低了一些，大部分都是给的资源；任务给的护符大部分都是重复的，仅有稻荷神社的两个护符可以随着探索增长。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0023.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;部分截图展示&#34;&gt;部分截图展示&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0005.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0006.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0007.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0008.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0009.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0027.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0030.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;鸣谢&#34;&gt;鸣谢&lt;/h2&gt;
+&lt;p&gt;感谢老马 (&lt;a href=&#34;https://twitter.com/bgm38&#34;&gt;twitter: @bgm38&lt;/a&gt;) 全程协助帮忙搭起这个小博客！&lt;/p&gt;
+&lt;p&gt;另，本博客思考再三后决定不开放评论功能，如有疑问请&lt;a href=&#34;mailto:aozaki.kuro@gmail.com&#34;&gt;邮件联系&lt;/a&gt;。&lt;/p&gt;</content>
+            
+            
+            
+            
+            
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/categories/%E6%B8%B8%E6%88%8F/" term="游戏" label="游戏" />
+                            
+                        
+                    
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/tags/ps4/" term="PS4" label="PS4" />
+                            
+                        
+                            
+                            
+                            
+                                <category scheme="https://aozaki-kuro.com/tags/%E6%B8%B8%E6%88%8F/" term="游戏" label="游戏" />
+                            
+                        
+                    
+                
+            
+        </entry>
+    
+</feed>

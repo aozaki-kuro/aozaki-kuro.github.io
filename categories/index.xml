@@ -1,1 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Categories on Aozaki's Note</title><link>https://aozaki-kuro.com/categories/</link><description>Recent content in Categories on Aozaki's Note</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Sun, 09 Aug 2020 11:29:51 +0800</lastBuildDate><atom:link href="https://aozaki-kuro.com/categories/index.xml" rel="self" type="application/rss+xml"/><item><title>折腾</title><link>https://aozaki-kuro.com/categories/%E6%8A%98%E8%85%BE/</link><pubDate>Sun, 09 Aug 2020 11:29:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><guid>https://aozaki-kuro.com/categories/%E6%8A%98%E8%85%BE/</guid><description/></item><item><title>随笔</title><link>https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/</link><pubDate>Fri, 07 Aug 2020 21:18:14 +0000</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><guid>https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/</guid><description/></item><item><title>游戏</title><link>https://aozaki-kuro.com/categories/%E6%B8%B8%E6%88%8F/</link><pubDate>Tue, 04 Aug 2020 20:51:02 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><guid>https://aozaki-kuro.com/categories/%E6%B8%B8%E6%88%8F/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Aozaki&#39;s Note</title>
+    <link>https://aozaki-kuro.com/categories/</link>
+    <description>Recent content in Categories on Aozaki&#39;s Note</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor>
+    <webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster>
+    <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+    <lastBuildDate>Sun, 09 Aug 2020 11:29:51 +0800</lastBuildDate>
+    
+	<atom:link href="https://aozaki-kuro.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>折腾</title>
+      <link>https://aozaki-kuro.com/categories/%E6%8A%98%E8%85%BE/</link>
+      <pubDate>Sun, 09 Aug 2020 11:29:51 +0800</pubDate>
+      <author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author>
+      <guid>https://aozaki-kuro.com/categories/%E6%8A%98%E8%85%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>随笔</title>
+      <link>https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/</link>
+      <pubDate>Fri, 07 Aug 2020 21:18:14 +0000</pubDate>
+      <author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author>
+      <guid>https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>游戏</title>
+      <link>https://aozaki-kuro.com/categories/%E6%B8%B8%E6%88%8F/</link>
+      <pubDate>Tue, 04 Aug 2020 20:51:02 +0800</pubDate>
+      <author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author>
+      <guid>https://aozaki-kuro.com/categories/%E6%B8%B8%E6%88%8F/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
