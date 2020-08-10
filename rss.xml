@@ -1,4 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Mon, 10 Aug 2020 09:38:22 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>Hugo部署与踩坑记</title><link>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</guid><pubDate>Sun, 09 Aug 2020 11:29:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Mon, 10 Aug 2020 10:29:10 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>利用Github Action自动化部署Hugo</title><link>https://aozaki-kuro.com/posts/2020-08-10-github-action/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-10-github-action/</guid><pubDate>Mon, 10 Aug 2020 18:04:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>先前抱怨过Hugo本地编译再&lt;code>git push&lt;/code>至远端的操作过于繁琐，今天发现可以通过Github Action实现对Hugo的自动化部署并实践成功，故记录折腾过程。&lt;/p>
+&lt;h2 id="建立新respiratory放置博客源文件">建立新Respiratory放置博客源文件&lt;/h2>
+&lt;p>这一步不用说吧，新建后将所有文件添加至新repo里，然后准备进行下一步操作。&lt;/p>
+&lt;h2 id="通过github-actions进行自动部署">通过Github Actions进行自动部署&lt;/h2>
+&lt;p>在本地新生成用于两个repo间通讯的SSH KEY&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">ssh-keygen -tecdsa
+cat ~/.ssh/id_ecdsa.pub &lt;span class="c1">#获取公钥&lt;/span>
+cat ~/.ssh/id_ecdsa. &lt;span class="c1"># 获取私钥&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>添加私钥的方法如下
+&lt;img src="https://aozaki-kuro.com/posts/2020-08-10-github-action/0004.jpg" alt="">
+&lt;img src="https://aozaki-kuro.com/posts/2020-08-10-github-action/0005.jpg" alt="">
+此处因我的私钥变量名定为&lt;code>ACTIONS_DEPLOY_KEY&lt;/code>，故填写相应名称。&lt;/p>
+&lt;p>在放置博客源文件的repo里，在Actions中建立Workflow
+&lt;img src="https://aozaki-kuro.com/posts/2020-08-10-github-action/0006.jpg" alt="">&lt;/p>
+&lt;p>我的build.yml文件如下&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="k">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>Hugo&lt;span class="w"> &lt;/span>Build&lt;span class="w"> &lt;/span>and&lt;span class="w"> &lt;/span>Deploy&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="k">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- master&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="k">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">build-deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>ubuntu-latest&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="k">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>actions/checkout@v1&lt;span class="w"> &lt;/span>&lt;span class="c"># v2 does not have submodules option now&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="k">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>Setup&lt;span class="w"> &lt;/span>Hugo&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>peaceiris/actions-hugo@v2&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>latest&lt;span class="w"> &lt;/span>&lt;span class="c"># 应用最新的hugo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">extended&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 我的主题需要应用hugo-extende&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="k">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>Build&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>hugo&lt;span class="w"> &lt;/span>--gc&lt;span class="w"> &lt;/span>--minify&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="k">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>Deploy&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>peaceiris/actions-gh-pages@v3&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">deploy_key&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>${{&lt;span class="w"> &lt;/span>secrets.ACTIONS_DEPLOY_KEY&lt;span class="w"> &lt;/span>}}&lt;span class="w"> &lt;/span>&lt;span class="c">#这里在repo settings里填入SSH私钥&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">external_repository&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>xxxxxxxx/xxxxxxxx.github.io&lt;span class="w"> &lt;/span>&lt;span class="c"># &amp;lt;- 改成自己的 user github page&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>./public&lt;span class="w"> &lt;/span>&lt;span class="c"># &amp;lt;- 指定成品放置文件夹&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">publish_branch&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>master&lt;span class="w"> &lt;/span>&lt;span class="c"># &amp;lt;- 远端repo目标分支&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>随后即可等待自动远端生成站点。&lt;/p>
+&lt;h2 id="github-desktop">Github Desktop&lt;/h2>
+&lt;p>对于我这样几乎无Coding基础的用户来说，为了更进一步少敲代码，除了自己写一个批处理文件，也可以应用Github Desktop进行处理。桌面版在&lt;a href="https://desktop.github.com/">这里下载&lt;/a>，在&lt;code>pull&lt;/code>后即可进行&lt;code>commit&lt;/code>和&lt;code>push&lt;/code>操作。唯一需要注意的是，如果之前就用的SSH连接，且仅在WSL内生成过SSH KEY，在Windows下需要再进行一次操作以保证能勾顺利&lt;code>git push&lt;/code>&lt;/p>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>所以说犯懒是推动发明进步的第一生产力（迫真）&lt;/p>
+&lt;p>目前是通过Hugo部署在Github Pages上，套了一层Cloudflare CDN，并利用Github Action完成自动化部署；本地则通过Github Desktop简化上传操作。&lt;/p>
+&lt;p>折腾到现在应该基本达成顺利、顺畅写博客的目的了。&lt;del>总感觉有点本末倒置了啊喂&lt;/del>&lt;/p></description><category domain="https://aozaki-kuro.com/categories/%E6%8A%98%E8%85%BE/">折腾</category><category domain="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/">折腾</category><category domain="https://aozaki-kuro.com/tags/%E7%BD%91%E7%BB%9C/">网络</category></item><item><title>Hugo部署与踩坑记</title><link>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</guid><pubDate>Sun, 09 Aug 2020 11:29:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
 &lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>
 &lt;hr>
 &lt;h2 id="wsl2的部署">WSL2的部署&lt;/h2>
@@ -151,71 +239,6 @@ git push
 &lt;p>原因很简单，Cloudflare的CDN遍布全世界，并且提供号称全球最快的DNS &lt;code>1.1.1.1&lt;/code>、免费的SSL证书，以及号称几乎打不死的DDoS保护，而且最重要的是不需要备案🤣 近期还听说Cloudflare在内地与百度有合作，部署了大量节点，想必访问速度应该是差不到哪里去……吧。&lt;/p>
 &lt;p>配置过程不详述了，我主要参考的是&lt;a href="https://mogeko.me/2019/056/">Mogeko的Cloudflare CDN添加教程&lt;/a>。&lt;/p>
 &lt;p>部署后的踩坑记录更新在后面。&lt;/p>
-&lt;h2 id="通过github-actions进行自动部署">通过Github Actions进行自动部署&lt;/h2>
-&lt;p>新建一个repo并上传自己博客源文件后，从Actions里添加如下Workflow&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
-&lt;/span>&lt;span class="lnt">17
-&lt;/span>&lt;span class="lnt">18
-&lt;/span>&lt;span class="lnt">19
-&lt;/span>&lt;span class="lnt">20
-&lt;/span>&lt;span class="lnt">21
-&lt;/span>&lt;span class="lnt">22
-&lt;/span>&lt;span class="lnt">23
-&lt;/span>&lt;span class="lnt">24
-&lt;/span>&lt;span class="lnt">25
-&lt;/span>&lt;span class="lnt">26
-&lt;/span>&lt;span class="lnt">27
-&lt;/span>&lt;span class="lnt">28
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">name: Hugo Build and Deploy
-on:
-push:
-branches:
-- master
-jobs:
-build-deploy:
-runs-on: ubuntu-latest
-steps:
-- uses: actions/checkout@v1 &lt;span class="c1"># v2 does not have submodules option now&lt;/span>
-with:
-submodules: &lt;span class="nb">true&lt;/span>
-- name: Setup Hugo
-uses: peaceiris/actions-hugo@v2
-with:
-&lt;span class="c1"># The Hugo version to download (if necessary) and use. Example: 0.58.2&lt;/span>
-hugo-version: latest &lt;span class="c1"># optional, default is latest&lt;/span>
-&lt;span class="c1"># Download (if necessary) and use Hugo extended version. Example: true&lt;/span>
-extended: &lt;span class="nb">true&lt;/span> &lt;span class="c1"># optional, default is false&lt;/span>
-- name: Build
-run: hugo --gc --minify
-- name: Deploy
-uses: peaceiris/actions-gh-pages@v3
-with:
-deploy_key: &lt;span class="si">${&lt;/span>&lt;span class="p">{ secrets.ACTIONS_DEPLOY_KEY &lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="o">}&lt;/span> &lt;span class="c1">#这里在repo settings里填入SSH私钥&lt;/span>
-external_repository: xxxxxxxx/xxxxxxxx.github.io &lt;span class="c1"># &amp;lt;- 改成自己的 user github page&lt;/span>
-publish_dir: ./public &lt;span class="c1"># &amp;lt;- 指定成品放置文件夹&lt;/span>
-publish_branch: master &lt;span class="c1"># &amp;lt;- 远端repo目标分支&lt;/span>
-&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>随后即可等待远端生成站点。&lt;/p>
 &lt;hr>
 &lt;h2 id="踩坑记">踩坑记&lt;/h2>
 &lt;h3 id="css错误的排查">CSS错误的排查&lt;/h3>
