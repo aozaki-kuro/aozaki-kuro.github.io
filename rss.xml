@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Mon, 10 Aug 2020 09:18:12 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>Hugo部署与踩坑记</title><link>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</guid><pubDate>Sun, 09 Aug 2020 11:29:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Mon, 10 Aug 2020 09:30:51 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>Hugo部署与踩坑记</title><link>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</link><guid isPermaLink="true">https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</guid><pubDate>Sun, 09 Aug 2020 11:29:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
 &lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>
 &lt;hr>
 &lt;h2 id="wsl2的部署">WSL2的部署&lt;/h2>
@@ -152,6 +152,70 @@ git push
 &lt;p>配置过程不详述了，我主要参考的是&lt;a href="https://mogeko.me/2019/056/">Mogeko的Cloudflare CDN添加教程&lt;/a>。&lt;/p>
 &lt;p>部署后的踩坑记录更新在后面。&lt;/p>
 &lt;h2 id="通过github-actions进行自动部署">通过Github Actions进行自动部署&lt;/h2>
+&lt;p>新建一个repo并上传自己博客源文件后，从Actions里添加如下Workflow&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">name: Hugo Build and Deploy
+on:
+push:
+branches:
+- master
+jobs:
+build-deploy:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v1 &lt;span class="c1"># v2 does not have submodules option now&lt;/span>
+with:
+submodules: &lt;span class="nb">true&lt;/span>
+- name: Setup Hugo
+uses: peaceiris/actions-hugo@v2
+with:
+&lt;span class="c1"># The Hugo version to download (if necessary) and use. Example: 0.58.2&lt;/span>
+hugo-version: latest &lt;span class="c1"># optional, default is latest&lt;/span>
+&lt;span class="c1"># Download (if necessary) and use Hugo extended version. Example: true&lt;/span>
+extended: &lt;span class="nb">true&lt;/span> &lt;span class="c1"># optional, default is false&lt;/span>
+- name: Build
+run: hugo --gc --minify
+- name: Deploy
+uses: peaceiris/actions-gh-pages@v3
+with:
+deploy_key: &lt;span class="si">${&lt;/span>&lt;span class="p">{ secrets.ACTIONS_DEPLOY_KEY &lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="o">}&lt;/span> &lt;span class="c1">#这里在repo settings里填入SSH私钥&lt;/span>
+external_repository: xxxxxxxx/xxxxxxxx.github.io &lt;span class="c1"># &amp;lt;- 改成自己的 user github page&lt;/span>
+publish_dir: ./public &lt;span class="c1"># &amp;lt;- 指定成品放置文件夹&lt;/span>
+publish_branch: master &lt;span class="c1"># &amp;lt;- 远端repo目标分支&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>随后即可等待远端生成站点。&lt;/p>
 &lt;hr>
 &lt;h2 id="踩坑记">踩坑记&lt;/h2>
 &lt;h3 id="css错误的排查">CSS错误的排查&lt;/h3>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><title type="text">Aozaki's Note</title><subtitle type="html">Aozaki Kuro's Notes, take it easy.</subtitle><updated>2020-08-10T09:18:12+00:00</updated><id>https://aozaki-kuro.com/</id><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/"/><link rel="self" type="application/atom+xml" href="https://aozaki-kuro.com/atom.xml"/><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><generator uri="https://gohugo.io/" version="0.74.3">Hugo</generator><entry><title type="text">Hugo部署与踩坑记</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/"/><id>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</id><updated>2020-08-10T09:18:09+00:00</updated><published>2020-08-09T11:29:51+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><title type="text">Aozaki's Note</title><subtitle type="html">Aozaki Kuro's Notes, take it easy.</subtitle><updated>2020-08-10T09:30:51+00:00</updated><id>https://aozaki-kuro.com/</id><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/"/><link rel="self" type="application/atom+xml" href="https://aozaki-kuro.com/atom.xml"/><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><generator uri="https://gohugo.io/" version="0.74.3">Hugo</generator><entry><title type="text">Hugo部署与踩坑记</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/"/><id>https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/</id><updated>2020-08-10T09:30:47+00:00</updated><published>2020-08-09T11:29:51+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
 &lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>……</summary><content type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/0001.jpg" alt="">&lt;/p>
 &lt;p>本博客部署于Github Pages上，最初构建时应用的Hexo。在被Node.js的巨量依赖和最终页面生成速度面前决定迁移至Hugo。Hugo部署的坑很多，故保留完整操作与相关踩坑记录。😫&lt;/p>
 &lt;hr>
@@ -153,6 +153,70 @@ git push
 &lt;p>配置过程不详述了，我主要参考的是&lt;a href="https://mogeko.me/2019/056/">Mogeko的Cloudflare CDN添加教程&lt;/a>。&lt;/p>
 &lt;p>部署后的踩坑记录更新在后面。&lt;/p>
 &lt;h2 id="通过github-actions进行自动部署">通过Github Actions进行自动部署&lt;/h2>
+&lt;p>新建一个repo并上传自己博客源文件后，从Actions里添加如下Workflow&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">name: Hugo Build and Deploy
+on:
+push:
+branches:
+- master
+jobs:
+build-deploy:
+runs-on: ubuntu-latest
+steps:
+- uses: actions/checkout@v1 &lt;span class="c1"># v2 does not have submodules option now&lt;/span>
+with:
+submodules: &lt;span class="nb">true&lt;/span>
+- name: Setup Hugo
+uses: peaceiris/actions-hugo@v2
+with:
+&lt;span class="c1"># The Hugo version to download (if necessary) and use. Example: 0.58.2&lt;/span>
+hugo-version: latest &lt;span class="c1"># optional, default is latest&lt;/span>
+&lt;span class="c1"># Download (if necessary) and use Hugo extended version. Example: true&lt;/span>
+extended: &lt;span class="nb">true&lt;/span> &lt;span class="c1"># optional, default is false&lt;/span>
+- name: Build
+run: hugo --gc --minify
+- name: Deploy
+uses: peaceiris/actions-gh-pages@v3
+with:
+deploy_key: &lt;span class="si">${&lt;/span>&lt;span class="p">{ secrets.ACTIONS_DEPLOY_KEY &lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="o">}&lt;/span> &lt;span class="c1">#这里在repo settings里填入SSH私钥&lt;/span>
+external_repository: xxxxxxxx/xxxxxxxx.github.io &lt;span class="c1"># &amp;lt;- 改成自己的 user github page&lt;/span>
+publish_dir: ./public &lt;span class="c1"># &amp;lt;- 指定成品放置文件夹&lt;/span>
+publish_branch: master &lt;span class="c1"># &amp;lt;- 远端repo目标分支&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>随后即可等待远端生成站点。&lt;/p>
 &lt;hr>
 &lt;h2 id="踩坑记">踩坑记&lt;/h2>
 &lt;h3 id="css错误的排查">CSS错误的排查&lt;/h3>
@@ -192,7 +256,7 @@ git push
 &lt;p>更多操作及详情，请查看MemE项目主页：https://github.com/reuixiy/hugo-theme-meme/blob/master/README.zh-cn.md &lt;a href="https://aozaki-kuro.com/posts/2020-08-09-troubled-hugo/#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><category scheme="https://aozaki-kuro.com/categories/%E6%8A%98%E8%85%BE/" term="折腾" label="折腾"/><category scheme="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/" term="折腾" label="折腾"/><category scheme="https://aozaki-kuro.com/tags/%E7%BD%91%E7%BB%9C/" term="网络" label="网络"/></entry><entry><title type="text">毕业了</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/"/><id>https://aozaki-kuro.com/posts/2020-08-07-master-graduation/</id><updated>2020-08-10T09:18:09+00:00</updated><published>2020-08-07T21:18:14+00:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0001.jpg" alt="">&lt;/p>
+&lt;/section></content><category scheme="https://aozaki-kuro.com/categories/%E6%8A%98%E8%85%BE/" term="折腾" label="折腾"/><category scheme="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/" term="折腾" label="折腾"/><category scheme="https://aozaki-kuro.com/tags/%E7%BD%91%E7%BB%9C/" term="网络" label="网络"/></entry><entry><title type="text">毕业了</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/"/><id>https://aozaki-kuro.com/posts/2020-08-07-master-graduation/</id><updated>2020-08-10T09:30:47+00:00</updated><published>2020-08-07T21:18:14+00:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0001.jpg" alt="">&lt;/p>
 &lt;p>总算是毕业了，怎么说呢，准备好从一个火坑到一个火坑。&lt;/p>……</summary><content type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0001.jpg" alt="">&lt;/p>
 &lt;p>总算是毕业了，怎么说呢，准备好从一个火坑到一个火坑。&lt;/p>
 &lt;h2 id="漫长的轮转">漫长的轮转&lt;/h2>
@@ -216,7 +280,7 @@ git push
 &lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-07-master-graduation/0002.jpg" alt="">&lt;/p>
 &lt;p>尽管有诸多的不如意和心惊胆战的时刻，总算还是完成了3年的轮转，拿到了学位证、学历证、医师执照、轮转证，顺利达成四证合一的目标。还努力考上了博士，集齐了三张入学通知书。&lt;/p>
 &lt;p>接下来就是面对博士生涯，还有今后的职业规划了。&lt;/p>
-&lt;p>……一个火坑到另一个火坑，希望博士能顺利完成吧。&lt;/p></content><category scheme="https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/><category scheme="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/></entry><entry><title type="text">新博客的折腾与迷思</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/"/><id>https://aozaki-kuro.com/posts/2020-08-05-why-blogging/</id><updated>2020-08-10T09:18:09+00:00</updated><published>2020-08-05T15:55:19+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/0001.jpg" alt="">&lt;/p>
+&lt;p>……一个火坑到另一个火坑，希望博士能顺利完成吧。&lt;/p></content><category scheme="https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/><category scheme="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/></entry><entry><title type="text">新博客的折腾与迷思</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/"/><id>https://aozaki-kuro.com/posts/2020-08-05-why-blogging/</id><updated>2020-08-10T09:30:47+00:00</updated><published>2020-08-05T15:55:19+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/0001.jpg" alt="">&lt;/p>
 &lt;p>虽然说昨天就已经顺利建立了Hexo + NexT的博客，并且好不容易动手写完了久违的一篇博客，并且想写下一点点迷思。&lt;/p>……</summary><content type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/0001.jpg" alt="">&lt;/p>
 &lt;p>虽然说昨天就已经顺利建立了Hexo + NexT的博客，并且好不容易动手写完了久违的一篇博客，并且想写下一点点迷思。&lt;/p>
 &lt;h2 id="折腾">折腾&lt;/h2>
@@ -244,7 +308,7 @@ git push
 &lt;p>网民年龄及学历结构，占比最大的群体分别是“15-19岁”以及“初中学历”，详见第45次《中国互联网络发展状况统计报告》：http://www.cac.gov.cn/2020-04/27/c_1589535470378587.htm &lt;a href="https://aozaki-kuro.com/posts/2020-08-05-why-blogging/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><category scheme="https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/><category scheme="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/></entry><entry><title type="text">《对马岛之鬼》白金后简评</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/"/><id>https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/</id><updated>2020-08-10T09:18:09+00:00</updated><published>2020-08-04T20:51:02+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0004.jpg" alt="">&lt;/p>
+&lt;/section></content><category scheme="https://aozaki-kuro.com/categories/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/><category scheme="https://aozaki-kuro.com/tags/%E9%9A%8F%E7%AC%94/" term="随笔" label="随笔"/></entry><entry><title type="text">《对马岛之鬼》白金后简评</title><link rel="alternate" type="text/html" href="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/"/><id>https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/</id><updated>2020-08-10T09:30:47+00:00</updated><published>2020-08-04T20:51:02+08:00</published><author><name>Aozaki Kuro</name><uri>https://aozaki-kuro.com/</uri><email>Aozaki.Kuro@gmail.com</email></author><rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0004.jpg" alt="">&lt;/p>
 &lt;p>终于是花了两三周时间把 &lt;del>对蒙忍&lt;/del> 对马岛之鬼白金了。总体非常满意游戏的质量，而且本作可谓是PS4末期的诚意之作，觉得还是有必要稍稍简评。&lt;/p>……</summary><content type="html">&lt;p>&lt;img src="https://aozaki-kuro.com/posts/2020-08-04-ghost-of-tsushima/0004.jpg" alt="">&lt;/p>
 &lt;p>终于是花了两三周时间把 &lt;del>对蒙忍&lt;/del> 对马岛之鬼白金了。总体非常满意游戏的质量，而且本作可谓是PS4末期的诚意之作，觉得还是有必要稍稍简评。&lt;/p>
 &lt;h2 id="总体评分9分">总体评分：9分&lt;/h2>
