@@ -1,4 +1,168 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Tue, 11 Aug 2020 04:08:13 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>人性 #1 左右为难</title><link>https://aozaki-kuro.com/humanity/0001/</link><guid isPermaLink="true">https://aozaki-kuro.com/humanity/0001/</guid><pubDate>Tue, 11 Aug 2020 09:39:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>这是我在肿瘤科时遇到的老病人，胃癌患者，五十多岁的美籍华人，总病程一年多，来院打化疗。&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Tue, 11 Aug 2020 06:19:41 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>本地图片库的整理思路</title><link>https://aozaki-kuro.com/tech/2020-08-11-make-picture-storage-great-again/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/2020-08-11-make-picture-storage-great-again/</guid><pubDate>Tue, 11 Aug 2020 12:21:47 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;strong>&lt;div style="text-align: center;">
+WARNING！本文部分内容建议18岁以上阅读。
+&lt;/div>&lt;/strong>&lt;/p>
+&lt;p>&lt;br>&lt;br>
+上个月把自己的本地图库给重构了一次，稍微缓解了某些文件夹乱如&lt;code>node_modules&lt;/code>的处境&lt;span class="spoiler" >让色图整理变得伟大！&lt;/span>&lt;/p>
+&lt;h2 id="发现问题">发现问题&lt;/h2>
+&lt;p>事情的起因其实是根据Pockies的教程将自己的视频库&lt;span class="spoiler" >爱情动作片库&lt;/span>进行了一次整理，并且搭建起了基于群晖的Plex视频库。&lt;/p>
+&lt;p>感兴趣的读者可以 &lt;strong>&lt;a href="https://pockies.github.io/2020/01/09/av-data-capture-jellyfin-kodi/">点击这里&lt;/a>&lt;/strong> 学习如何整理。&lt;/p>
+&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-make-picture-storage-great-again/0002.jpg" alt="0002.jpg" title="嗯，很整齐，很美观，满足强迫症和整理癖的需求">&lt;/p>
+&lt;p>然而当我点开放置Pixiv Downloader批量拖下来的图片库时…我就感到不适。&lt;/p>
+&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-make-picture-storage-great-again/0001.jpg" alt="0001.jpg" title="这就是我的感受">&lt;/p>
+&lt;p>由于整个图库文件夹实在过于积重难返，加上出现了用Resilo Sync在多台电脑之间选择性同步的需求，遂下定决心将图库文件夹进行一次重构。&lt;/p>
+&lt;h2 id="提出假设">提出假设&lt;/h2>
+&lt;h3 id="通过tags分类">通过tags分类？&lt;/h3>
+&lt;p>目前互联网上最优秀的图库应当属于Booru站点，作为代表的当然是Danbooru以及Yande.re。&lt;/p>
+&lt;p>Booru站点的优势在于拥有强大的&lt;code>tags&lt;/code>功能，不仅可以对图片的作者进行标记，且可以通过大量用户编辑的&lt;code>tags&lt;/code>对&lt;del>性癖&lt;/del>进行分类。&lt;/p>
+&lt;p>原先的构想也是基于&lt;code>tags&lt;/code>，以作者为文件夹单位，进行图库的整理。但是发现&lt;code>tags&lt;/code>的交叉太多，并且不可能一张张手动进行标记，遂放弃。&lt;/p>
+&lt;h3 id="仅以作者进行分类">仅以作者进行分类？&lt;/h3>
+&lt;p>这个其实是最暴力的方式。因为我本地部署了&lt;code>Listary&lt;/code>和&lt;code>Everything&lt;/code>进行索引和搜素服务，所以仅仅对作者进行搜索是不成问题了。&lt;/p>
+&lt;p>但是在开篇就已经说过了，Pixiv Downloader下载堆积出来的混乱文件夹令我只有把文件夹关掉的冲动，所以否决。&lt;/p>
+&lt;p>最大的问题还是在于图片的数量和来源非常杂乱，不像爱情动作片可以从DMM.co.jp等站点拉取标准化的信息并进行分类。&lt;/p>
+&lt;h2 id="解决问题">解决问题&lt;/h2>
+&lt;p>那么最终怎么解决呢？我选择了并轨制。&lt;/p>
+&lt;p>事先说明：这是一个基于主观判断的整理方式，并不一定适合所有人。&lt;/p>
+&lt;h3 id="最终的文件夹结构">最终的文件夹结构&lt;/h3>
+&lt;p>尽管分类和分层变多了，但尽可能结合了tags的便捷，并最大程度利用了Pixiv Downloader的文件结构有助于检索。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">图库
+│
+│
+├────图片
+│ │
+│ ├────Artist
+│ │ ├───Paid Contents &lt;span class="c1">#故名思义&lt;/span>
+│ │ │ ├────xxx
+│ │ │ │ └──xxx_fanbox &lt;span class="c1">#添加来源&lt;/span>
+│ │ │ └────yyy &lt;span class="c1">#下略&lt;/span>
+│ │ │
+│ │ ├───★★★★★ &lt;span class="c1">#根据星级分层&lt;/span>
+│ │ ├───★★★★
+│ │ ├───★★★
+│ │ └───Unsorted &lt;span class="c1">#用作批量下载的缓冲区，尽快解决吧…&lt;/span>
+│ │
+│ ├────Fetish &lt;span class="c1">#故名思义&lt;/span>
+│ │ ├───xxx
+│ │ └───yyy
+│ │
+│ ├────Title &lt;span class="c1">#根据不同的作品（游戏、动画等安放）&lt;/span>
+│ │ ├───xxx
+│ │ └───yyy
+│ │
+│ ├────Vtuber &lt;span class="c1">#根据不同的Vtuber进行分类&lt;/span>
+│ │ ├───xxx
+│ │ │ └──xxx_R18 &lt;span class="c1">#便于检索，下略&lt;/span>
+│ │ └───yyy
+│ │
+│ └────Unsorted &lt;span class="c1">#总有些无处安放的图&lt;/span>
+│
+├────照片 &lt;span class="c1">#自己拍摄的照片&lt;/span>
+│ ├───人像
+│ ├───风景
+│ └───其他
+│
+└────壁纸
+├───5K Wallpapers
+├───2K Wallpapers
+└───iPhone Wallpapers
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="aritist文件夹">Aritist文件夹&lt;/h3>
+&lt;p>主要形式是&lt;code>&amp;quot;userName&amp;quot; (&amp;quot;pixivID&amp;quot;)&lt;/code>的形式，例如&lt;code>米山舞 (1554775)&lt;/code>，这一部分可手动创建，或通过Pixiv Downloader进行定义。&lt;/p>
+&lt;p>我的Pixiv Download参数设定如下&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">PxDownloader/&lt;span class="si">${&lt;/span>&lt;span class="nv">userName&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">userId&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="o">)&lt;/span>/&lt;span class="si">${&lt;/span>&lt;span class="nv">id&lt;/span>&lt;span class="si">}&lt;/span>_p0 &lt;span class="c1">#单一档案用&lt;/span>
+PxDownloader/&lt;span class="si">${&lt;/span>&lt;span class="nv">userName&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">userId&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="o">)&lt;/span>/&lt;span class="si">${&lt;/span>&lt;span class="nv">id&lt;/span>&lt;span class="si">}&lt;/span>_p&lt;span class="si">${&lt;/span>&lt;span class="nv">page&lt;/span>&lt;span class="si">}&lt;/span> &lt;span class="c1">#复数档案&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="将部分文件夹内文件名序列化">将部分文件夹内文件名序列化&lt;/h3>
+&lt;p>主要是Paid Contents这一部分来源非常乱：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Patreon上部分作者会提供当期奖励打包，但很多需要自己右键保存；&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>fanbox的图片命名是无序的，直接下载后放入图库会出现非常大的混乱；&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>有些时候连&lt;code>jpg&lt;/code>文件后缀也是&lt;code>jpeg&lt;/code>，强迫症非常不适&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>这么多问题，一个个手动就很蛋疼。于是我采用了&lt;code>ReNamer&lt;/code>，进行批量序列化的操作。&lt;/p>
+&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-make-picture-storage-great-again/0003.jpg" alt="0003.jpg">&lt;/p>
+&lt;blockquote>
+&lt;p>1.程序界面与结果预览；2.删除扩展名以外的文件名；&lt;/p>
+&lt;p>3.序列化并补足四位数；4.将所有的扩展名统一。&lt;/p>
+&lt;/blockquote>
+&lt;p>最后可以获得&lt;code>0001.jpg&lt;/code>起的令人舒适的文件夹内容。&lt;/p>
+&lt;h2 id="问题解决了吗">问题解决了吗？&lt;/h2>
+&lt;p>问题解决了一部分&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>细化文件夹结构，在直接文件夹内浏览时以少许速度为牺牲，提升了准确度；&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>解决了Unsorted缓冲区堆积过多却不知道向哪里分流的问题；&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>对于&lt;code>Listary&lt;/code>以及&lt;code>Everything&lt;/code>的影响较少。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>没有解决的问题：&lt;strong>针对文件直接添加&lt;/strong>&lt;code>tags&lt;/code>。&lt;/p>
+&lt;p>还是如同前文所说，&lt;code>tags&lt;/code>尽管可以最大程度细化分类、精准搜索图片，但是需要大量编辑人员进行添加，个人用户不可能做到这么精细。&lt;/p>
+&lt;p>另外，基于&lt;code>tags&lt;/code>的文件浏览器的缺乏，以及数据共通的难度。e.g. XnView尽管拥有类似&lt;code>tags&lt;/code>的系统，但是无法和iOS进行数据共通。&lt;/p>
+&lt;p>所以最后放弃了&lt;code>tags&lt;/code>分类的想法。&lt;/p>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>重构图库的结果是并轨制，以少量文件夹浏览速度为牺牲，提升了准确度。&lt;/p>
+&lt;p>如果有能够结合booru和plex的优秀的&lt;code>tags&lt;/code>管理方法，请务必告诉我。&lt;/p></description><category domain="https://aozaki-kuro.com/tech/">tech</category><category domain="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/">折腾</category><category domain="https://aozaki-kuro.com/tags/%E5%BC%BA%E8%BF%AB%E7%97%87/">强迫症</category><category domain="https://aozaki-kuro.com/tags/%E6%95%B4%E7%90%86%E7%99%96/">整理癖</category><category domain="https://aozaki-kuro.com/tags/%E4%BB%93%E9%BC%A0%E7%97%87%E6%82%A3%E8%80%85/">仓鼠症患者</category></item><item><title>人性 #1 左右为难</title><link>https://aozaki-kuro.com/humanity/0001/</link><guid isPermaLink="true">https://aozaki-kuro.com/humanity/0001/</guid><pubDate>Tue, 11 Aug 2020 09:39:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>这是我在肿瘤科时遇到的老病人，胃癌患者，五十多岁的美籍华人，总病程一年多，来院打化疗。&lt;/p>
 &lt;p>晚上值班的时候，患者一脸愁眉苦脸地来找我倒苦水，平时我一般不太接这些话茬，但看着他形单影只的样子，加之肿瘤患者的心理疏导重要，我就坐下来听了。&lt;/p>
 &lt;p>这位患者，就叫他老刘吧，胃癌术后化疗，尽管是维持化疗，用的方案还挺贵的。出于好奇，我问了问他为什么会选择在国内全自费打化疗。老刘说，他是美籍华人，在中国有充足的医疗资料就可以回美国通过商业保险报销，所以近一年都会在中美之间往返，加之在上海也有一套不错的房子，就当是旅行以及看看再国内的亲戚朋友了。&lt;/p>
 &lt;p>但是岁数上去了，加上化疗对身体伤害多少还是比较大的，老刘觉得一个人整天在中美之间坐飞机往返渐渐吃力，准备把国内刚精装修完的房子卖了，回美国继续做化疗。&lt;/p>
