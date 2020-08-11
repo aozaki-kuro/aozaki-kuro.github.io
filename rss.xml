@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Tue, 11 Aug 2020 06:24:02 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>本地图片库的整理思路</title><link>https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</guid><pubDate>Tue, 11 Aug 2020 12:21:47 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;strong>&lt;div style="text-align: center;">
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Tue, 11 Aug 2020 06:29:14 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>本地图片库的整理思路</title><link>https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</guid><pubDate>Tue, 11 Aug 2020 12:21:47 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-picture-storage/0004.jpg" alt="0004.jpg">&lt;/p>
+&lt;p>&lt;strong>&lt;div style="text-align: center;">
 WARNING！本文部分内容建议18岁以上阅读。
 &lt;/div>&lt;/strong>&lt;/p>
 &lt;p>&lt;br>&lt;br>
@@ -6,9 +7,9 @@ WARNING！本文部分内容建议18岁以上阅读。
 &lt;h2 id="发现问题">发现问题&lt;/h2>
 &lt;p>事情的起因其实是根据Pockies的教程将自己的视频库&lt;span class="spoiler" >爱情动作片库&lt;/span>进行了一次整理，并且搭建起了基于群晖的Plex视频库。&lt;/p>
 &lt;p>感兴趣的读者可以 &lt;strong>&lt;a href="https://pockies.github.io/2020/01/09/av-data-capture-jellyfin-kodi/">点击这里&lt;/a>&lt;/strong> 学习如何整理。&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-make-picture-storage-great-again/0002.jpg" alt="0002.jpg" title="嗯，很整齐，很美观，满足强迫症和整理癖的需求">&lt;/p>
+&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-picture-storage/0002.jpg" alt="0002.jpg" title="嗯，很整齐，很美观，满足强迫症和整理癖的需求">&lt;/p>
 &lt;p>然而当我点开放置Pixiv Downloader批量拖下来的图片库时…我就感到不适。&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-make-picture-storage-great-again/0001.jpg" alt="0001.jpg" title="这就是我的感受">&lt;/p>
+&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-picture-storage/0001.jpg" alt="0001.jpg" title="这就是我的感受">&lt;/p>
 &lt;p>由于整个图库文件夹实在过于积重难返，加上出现了用Resilo Sync在多台电脑之间选择性同步的需求，遂下定决心将图库文件夹进行一次重构。&lt;/p>
 &lt;h2 id="提出假设">提出假设&lt;/h2>
 &lt;h3 id="通过tags分类">通过tags分类？&lt;/h3>
@@ -137,7 +138,7 @@ PxDownloader/&lt;span class="si">${&lt;/span>&lt;span class="nv">userName&lt;/sp
 &lt;/li>
 &lt;/ul>
 &lt;p>这么多问题，一个个手动就很蛋疼。于是我采用了&lt;code>ReNamer&lt;/code>，进行批量序列化的操作。&lt;/p>
-&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-make-picture-storage-great-again/0003.jpg" alt="0003.jpg">&lt;/p>
+&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-picture-storage/0003.jpg" alt="0003.jpg">&lt;/p>
 &lt;blockquote>
 &lt;p>1.程序界面与结果预览；2.删除扩展名以外的文件名；&lt;/p>
 &lt;p>3.序列化并补足四位数；4.将所有的扩展名统一。&lt;/p>
