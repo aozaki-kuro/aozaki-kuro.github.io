@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Tue, 11 Aug 2020 06:29:14 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>本地图片库的整理思路</title><link>https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</guid><pubDate>Tue, 11 Aug 2020 12:21:47 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-picture-storage/0004.jpg" alt="0004.jpg">&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Tue, 11 Aug 2020 06:47:13 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>本地图片库的整理思路</title><link>https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</guid><pubDate>Tue, 11 Aug 2020 12:21:47 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-picture-storage/0004.jpg" alt="0004.jpg">&lt;/p>
 &lt;p>&lt;strong>&lt;div style="text-align: center;">
 WARNING！本文部分内容建议18岁以上阅读。
 &lt;/div>&lt;/strong>&lt;/p>
@@ -15,7 +15,9 @@ WARNING！本文部分内容建议18岁以上阅读。
 &lt;h3 id="通过tags分类">通过tags分类？&lt;/h3>
 &lt;p>目前互联网上最优秀的图库应当属于Booru站点，作为代表的当然是Danbooru以及Yande.re。&lt;/p>
 &lt;p>Booru站点的优势在于拥有强大的&lt;code>tags&lt;/code>功能，不仅可以对图片的作者进行标记，且可以通过大量用户编辑的&lt;code>tags&lt;/code>对&lt;del>性癖&lt;/del>进行分类。&lt;/p>
-&lt;p>原先的构想也是基于&lt;code>tags&lt;/code>，以作者为文件夹单位，进行图库的整理。但是发现&lt;code>tags&lt;/code>的交叉太多，并且不可能一张张手动进行标记，遂放弃。&lt;/p>
+&lt;p>原先的构想也是基于&lt;code>tags&lt;/code>，以作者为文件夹单位，进行图库的整理。但是发现&lt;code>tags&lt;/code>的交叉太多，并且不可能一张张手动进行标记。此外也不想把一张图片复制到多个文件夹下（这和&lt;code>node_modules&lt;/code>有什么区别）。&lt;/p>
+&lt;p>如果说能把Plex的优点（服务端获取额外刮削信息并展示）和Booru的优点（大量&lt;code>tags&lt;/code>信息）结合起来就好了，但我不会写爬虫。此外还有一个难点：如何让本地图片和云端对应起来？图片可能来源于Twitter、Pixiv、fanbox、patreon等等网站，甚至是其他booru图站；极端情况下文件名丢失，对应难度直线上升。&lt;/p>
+&lt;p>基于以上理由，暂不考虑&lt;code>tags&lt;/code>分类法。&lt;/p>
 &lt;h3 id="仅以作者进行分类">仅以作者进行分类？&lt;/h3>
 &lt;p>这个其实是最暴力的方式。因为我本地部署了&lt;code>Listary&lt;/code>和&lt;code>Everything&lt;/code>进行索引和搜素服务，所以仅仅对作者进行搜索是不成问题了。&lt;/p>
 &lt;p>但是在开篇就已经说过了，Pixiv Downloader下载堆积出来的混乱文件夹令我只有把文件夹关掉的冲动，所以否决。&lt;/p>
@@ -24,7 +26,7 @@ WARNING！本文部分内容建议18岁以上阅读。
 &lt;p>那么最终怎么解决呢？我选择了并轨制。&lt;/p>
 &lt;p>事先说明：这是一个基于主观判断的整理方式，并不一定适合所有人。&lt;/p>
 &lt;h3 id="最终的文件夹结构">最终的文件夹结构&lt;/h3>
-&lt;p>尽管分类和分层变多了，但尽可能结合了tags的便捷，并最大程度利用了Pixiv Downloader的文件结构有助于检索。&lt;/p>
+&lt;p>尽管分类和分层变多了，但尽可能结合了&lt;code>tags&lt;/code>的便捷，并最大程度利用了Pixiv Downloader的文件结构有助于检索。&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -128,10 +130,10 @@ PxDownloader/&lt;span class="si">${&lt;/span>&lt;span class="nv">userName&lt;/sp
 &lt;p>主要是Paid Contents这一部分来源非常乱：&lt;/p>
 &lt;ul>
 &lt;li>
-&lt;p>Patreon上部分作者会提供当期奖励打包，但很多需要自己右键保存；&lt;/p>
+&lt;p>Patreon上部分作者会提供当期奖励打包，但很多需要自己右键保存&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>fanbox的图片命名是无序的，直接下载后放入图库会出现非常大的混乱；&lt;/p>
+&lt;p>fanbox的图片命名是无序的，直接下载后放入图库会出现非常大的混乱&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>有些时候连&lt;code>jpg&lt;/code>文件后缀也是&lt;code>jpeg&lt;/code>，强迫症非常不适&lt;/p>
@@ -148,13 +150,13 @@ PxDownloader/&lt;span class="si">${&lt;/span>&lt;span class="nv">userName&lt;/sp
 &lt;p>问题解决了一部分&lt;/p>
 &lt;ol>
 &lt;li>
-&lt;p>细化文件夹结构，在直接文件夹内浏览时以少许速度为牺牲，提升了准确度；&lt;/p>
+&lt;p>细化文件夹结构，在直接文件夹内浏览时以少许速度为牺牲，提升了准确度&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>解决了Unsorted缓冲区堆积过多却不知道向哪里分流的问题；&lt;/p>
+&lt;p>解决了Unsorted缓冲区堆积过多却不知道向哪里分流的问题&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>对于&lt;code>Listary&lt;/code>以及&lt;code>Everything&lt;/code>的影响较少。&lt;/p>
+&lt;p>对于&lt;code>Listary&lt;/code>以及&lt;code>Everything&lt;/code>的影响较少&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>没有解决的问题：&lt;strong>针对文件直接添加&lt;/strong>&lt;code>tags&lt;/code>。&lt;/p>
@@ -163,7 +165,7 @@ PxDownloader/&lt;span class="si">${&lt;/span>&lt;span class="nv">userName&lt;/sp
 &lt;p>所以最后放弃了&lt;code>tags&lt;/code>分类的想法。&lt;/p>
 &lt;h2 id="总结">总结&lt;/h2>
 &lt;p>重构图库的结果是并轨制，以少量文件夹浏览速度为牺牲，提升了准确度。&lt;/p>
-&lt;p>如果有能够结合booru和plex的优秀的&lt;code>tags&lt;/code>管理方法，请务必告诉我。&lt;/p></description><category domain="https://aozaki-kuro.com/tech/">tech</category><category domain="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/">折腾</category><category domain="https://aozaki-kuro.com/tags/%E5%BC%BA%E8%BF%AB%E7%97%87/">强迫症</category><category domain="https://aozaki-kuro.com/tags/%E6%95%B4%E7%90%86%E7%99%96/">整理癖</category><category domain="https://aozaki-kuro.com/tags/%E4%BB%93%E9%BC%A0%E7%97%87%E6%82%A3%E8%80%85/">仓鼠症患者</category></item><item><title>人性 #1 左右为难</title><link>https://aozaki-kuro.com/humanity/0001/</link><guid isPermaLink="true">https://aozaki-kuro.com/humanity/0001/</guid><pubDate>Tue, 11 Aug 2020 09:39:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>这是我在肿瘤科时遇到的老病人，胃癌患者，五十多岁的美籍华人，总病程一年多，来院打化疗。&lt;/p>
+&lt;p>如果有能够结合Booru和Plex的优秀的&lt;code>tags&lt;/code>管理方法，请务必告诉我。&lt;/p></description><category domain="https://aozaki-kuro.com/tech/">tech</category><category domain="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/">折腾</category><category domain="https://aozaki-kuro.com/tags/%E5%BC%BA%E8%BF%AB%E7%97%87/">强迫症</category><category domain="https://aozaki-kuro.com/tags/%E6%95%B4%E7%90%86%E7%99%96/">整理癖</category><category domain="https://aozaki-kuro.com/tags/%E4%BB%93%E9%BC%A0%E7%97%87%E6%82%A3%E8%80%85/">仓鼠症患者</category></item><item><title>人性 #1 左右为难</title><link>https://aozaki-kuro.com/humanity/0001/</link><guid isPermaLink="true">https://aozaki-kuro.com/humanity/0001/</guid><pubDate>Tue, 11 Aug 2020 09:39:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>这是我在肿瘤科时遇到的老病人，胃癌患者，五十多岁的美籍华人，总病程一年多，来院打化疗。&lt;/p>
 &lt;p>晚上值班的时候，患者一脸愁眉苦脸地来找我倒苦水，平时我一般不太接这些话茬，但看着他形单影只的样子，加之肿瘤患者的心理疏导重要，我就坐下来听了。&lt;/p>
 &lt;p>这位患者，就叫他老刘吧，胃癌术后化疗，尽管是维持化疗，用的方案还挺贵的。出于好奇，我问了问他为什么会选择在国内全自费打化疗。老刘说，他是美籍华人，在中国有充足的医疗资料就可以回美国通过商业保险报销，所以近一年都会在中美之间往返，加之在上海也有一套不错的房子，就当是旅行以及看看再国内的亲戚朋友了。&lt;/p>
 &lt;p>但是岁数上去了，加上化疗对身体伤害多少还是比较大的，老刘觉得一个人整天在中美之间坐飞机往返渐渐吃力，准备把国内刚精装修完的房子卖了，回美国继续做化疗。&lt;/p>
