@@ -1,4 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Wed, 12 Aug 2020 01:10:43 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>本地图片库的整理思路</title><link>https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</guid><pubDate>Tue, 11 Aug 2020 12:21:47 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-picture-storage/0004.jpg" alt="0004.jpg">&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Wed, 12 Aug 2020 03:35:09 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>浅尝Cloudflare Workers部署静态博客</title><link>https://aozaki-kuro.com/tech/2020-08-12-cloudflare-workers/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/2020-08-12-cloudflare-workers/</guid><pubDate>Wed, 12 Aug 2020 11:05:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>想到迁移到Cloudflare Workers的原因是看到了苏卡卡**&lt;a href="https://blog.skk.moe/post/deploy-blog-to-cf-workers-site/">对博客速度进一步优化的文章&lt;/a>**，觉得Cloudflare Workers这样的Serverless服务非常的酷，而且在短暂的部署尝试中我就感觉到快。&lt;/p>
+&lt;p>然而迁移后验证了朋友的说法，用用可以，但是把生产环境放上去还是算了。因此总体算是一次不太成功的尝试。由于我没有进一步排障和优化的能力，只能记录一下踩坑记录。&lt;/p>
+&lt;p>一句话总结：部署时撞到的坑非常非常多，可能比我部署Hugo时遇到的坑还要多。&lt;/p>
+&lt;h2 id="坑1wrangler需配置用户">坑1：Wrangler需配置用户&lt;/h2>
+&lt;p>我是利用Github Actions对博客更新进行CI，仅仅是这一步已经出现了大量的bug。&lt;/p>
+&lt;p>若要部署至Cloudflare Workers，需要应用Wrangler CLI进行部署。本地添加配置、如何填写相关项目可以继续参考**&lt;a href="https://blog.skk.moe/post/deploy-blog-to-cf-workers-site/">苏卡卡的文章&lt;/a>**&lt;/p>
+&lt;p>然而在Github Actions库中&lt;code>cloudflare/wrangler-action@1.2.0&lt;/code>，执行时直接报错，查看信息发现&lt;code>could not determine the current user wrangler&lt;/code>，考虑需要定义$USER，查看**&lt;a href="https://github.com/cloudflare/wrangler-action/issues/12">社区讨论&lt;/a>**后发现修改配置文件。&lt;/p>
+&lt;p>&lt;del>修改配置文件时感受到了来自yml深深的恶意&lt;/del>&lt;/p>
+&lt;p>最终配置文件如下：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="k">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>Hugo&lt;span class="w"> &lt;/span>Build&lt;span class="w"> &lt;/span>and&lt;span class="w"> &lt;/span>Deploy&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="k">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- master&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="k">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">build-deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>ubuntu-latest&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="k">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>actions/checkout@v1&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="k">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>Setup&lt;span class="w"> &lt;/span>Hugo&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>peaceiris/actions-hugo@v2&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>latest&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">extended&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="k">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>Build&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>hugo&lt;span class="w"> &lt;/span>--gc&lt;span class="w"> &lt;/span>--minify&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="k">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>Deploy&lt;span class="w"> &lt;/span>to&lt;span class="w"> &lt;/span>Cloudflare&lt;span class="w"> &lt;/span>Workers&lt;span class="w"> &lt;/span>with&lt;span class="w"> &lt;/span>Wrangler&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>cloudflare/wrangler-action@&lt;span class="m">1.2.0&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">env&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">USER&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>root&lt;span class="w"> &lt;/span>&lt;span class="c"># 非常重要！必须定义&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Your Cloudflare API Token&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">apiToken&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>${{&lt;span class="w"> &lt;/span>secrets.CLOUDFLARE_TOKEN&lt;span class="w"> &lt;/span>}}&lt;span class="w"> &lt;/span>&lt;span class="c"># 输入你自己定义的secret名称&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="坑2配置完workers后需要填写dns记录">坑2：配置完Workers后需要填写DNS记录&lt;/h2>
+&lt;p>这一点是个坑，几乎所有的教程都没有提到这里该怎么填。最后是从Cloudflare Community上翻到的答案（&lt;a href="https://community.cloudflare.com/t/setup-workers-on-personal-domain/88012/7">具体讨论点这里&lt;/a>）。&lt;/p>
+&lt;p>在指定router后（例如我的是指向&lt;code>dev.aozaki-kuro.com/*&lt;/code>），只需要在DNS记录内添加一个&lt;code>A&lt;/code>记录，指向一个空IP即可。&lt;/p>
+&lt;p>这个空IP可以是&lt;code>192.0.2.1&lt;/code>以及类似的空IP。&lt;/p>
+&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-12-cloudflare-workers/0001.jpg" alt="0001" title="其实就这么简单，但是连官方文档都没写，大部分教程也没写">&lt;/p>
+&lt;h2 id="坑3不支持中文路径">坑3：不支持中文路径&lt;/h2>
+&lt;p>尽管苏卡卡在博客中提到了对中文路径的解决，发现也Github上也merge了，但是实际部署后还是无法对&lt;code>/测试/index.html&lt;/code>这样的路径进行路由。意味着需要放弃博客内对整个中文tags的聚合。这一点是不太能接受的，也是不再继续用下去的原因。&lt;/p>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>Cloudflare Workers仅仅是部署就已经出现了这样那样的坑，更别说部署上去后效果也并不是那么理想。&lt;/p>
+&lt;p>目前保留了指向Cloudflare Workers的链接，但是不再CI上去，可以参观一下：&lt;/p>
+&lt;p>&lt;a href="https://dev.aozaki-kuro.com/">https://dev.aozaki-kuro.com/&lt;/a>
+&lt;code>Expire date: 2020-09-11&lt;/code>&lt;/p>
+&lt;p>总之是个坑.jpg&lt;/p></description><category domain="https://aozaki-kuro.com/tech/">tech</category><category domain="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/">折腾</category><category domain="https://aozaki-kuro.com/tags/%E7%BD%91%E7%BB%9C/">网络</category></item><item><title>本地图片库的整理思路</title><link>https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/2020-08-11-picture-storage/</guid><pubDate>Tue, 11 Aug 2020 12:21:47 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="https://aozaki-kuro.com/tech/2020-08-11-picture-storage/0004.jpg" alt="0004.jpg">&lt;/p>
 &lt;p>&lt;strong>&lt;div style="text-align: center;">
 WARNING！本文部分内容建议18岁以上阅读。
 &lt;/div>&lt;/strong>&lt;/p>
