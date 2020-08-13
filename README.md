@@ -1,4 +1,5 @@
 # aozaki-kuro.github.io
+
 The personal blog of Aozaki Kuro.
 
 [![Built on GitHub](https://github.com/aozaki-kuro/aozaki-kuro.com/workflows/Build/badge.svg)](https://github.com/aozaki-kuro/aozaki-kuro.com/actions)
