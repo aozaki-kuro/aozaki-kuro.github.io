@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Fri, 14 Aug 2020 07:12:01 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>文献阅读：S-ICD与ICD的临床效果评价</title><link>https://aozaki-kuro.com/tech/s-icd-vs-icd/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/s-icd-vs-icd/</guid><pubDate>Fri, 14 Aug 2020 09:44:09 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0000.jpg" alt="ICD-vs-S-ICD">&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Fri, 14 Aug 2020 09:14:22 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>文献阅读：S-ICD与ICD的临床效果评价</title><link>https://aozaki-kuro.com/tech/s-icd-vs-icd/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/s-icd-vs-icd/</guid><pubDate>Fri, 14 Aug 2020 09:44:09 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0000.jpg" alt="ICD-vs-S-ICD">&lt;/p>
 &lt;p>轮转期间其实收了不少无明显诱因的室颤病人，并在排除相关可逆性原因后选择植入ICD；同样，我也非常关注S-ICD的发展。&lt;/p>
 &lt;p>今天在NEJM上读到最新的S-ICD及ICD疗效评价，故记录下来。&lt;/p>
 &lt;hr>
@@ -15,7 +15,31 @@
 &lt;p>&lt;img src="0003.jpg" alt="S-ICD-implantation" title="S-ICD的4种入路">&lt;/p>
 &lt;p>但是，由于传统的经静脉ICD是直接向心肌释放除颤能量，因此可能具有更好的VT/VF识别率，以及更低的除颤能量，因此S-ICD一直以来备受质疑。&lt;/p>
 &lt;hr>
-&lt;p>这篇文献中的研究则是一项非劣效性研究，旨在明确S-ICD是否非劣效于传统ICD。该研究共纳入了876名患者，这些患者根据指南均具有I或IIa类植入ICD指征用以一级或二级预防。排除标准包括既往ICD植入史、合并有其他心动过缓并需要植入单腔/双腔起搏器、心室率小于170次/分的室速、药物和消融难治的复发性单形性室性心动过速。研究中共有442名患者植入S-ICD、434名患者经静脉植入ICD。&lt;/p>
+&lt;p>这篇文献中的研究则是一项非劣效性研究，旨在明确S-ICD是否非劣效于传统ICD。该项目基于PRAETORIAN研究，共纳入了876名患者。这些患者根据指南均具有I或IIa类植入ICD指征用以一级或二级预防。排除标准包括既往ICD植入史、合并有其他心动过缓并需要植入单腔/双腔起搏器、心室率小于170次/分的室速、药物和消融难治的复发性单形性室性心动过速。研究中共有442名患者植入S-ICD、434名患者经静脉植入ICD，并在植入后进行4个月的随访，并在之后每年至少随访2次。&lt;/p>
+&lt;p>主要终点事件：&lt;/p>
+&lt;ol>
+&lt;li>植入物相关的并发症
+&lt;ol>
+&lt;li>植入物失效致移除主机及导线&lt;/li>
+&lt;li>需要引流、输血、延长住院天数的囊袋血肿&lt;/li>
+&lt;li>植入物相关的栓塞事件&lt;/li>
+&lt;li>需介入手术并延长住院天数的气胸或血胸&lt;/li>
+&lt;li>心脏穿孔或填塞&lt;/li>
+&lt;li>导线重新放置或更换&lt;/li>
+&lt;li>其他需手术或药物介入治疗的与导线或主机相关的问题&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>不恰当放电&lt;/li>
+&lt;/ol>
+&lt;p>次要终点事件：&lt;/p>
+&lt;ol>
+&lt;li>包括主要终点的各个部分&lt;/li>
+&lt;li>任何原因导致的死亡&lt;/li>
+&lt;li>恰当的放电（包括ATP）&lt;/li>
+&lt;li>主要不良心脏事件（Major adverse cardiac events, MACE）&lt;/li>
+&lt;li>因心衰住院&lt;/li>
+&lt;li>分配设备交叉&lt;/li>
+&lt;/ol>
 &lt;p>&lt;img src="0004.jpg" alt="result1">
 &lt;img src="0005.jpg" alt="result2" title="主要终点事件">
 &lt;img src="0005.jpg" alt="result2" title="次要终点事件">&lt;/p>
