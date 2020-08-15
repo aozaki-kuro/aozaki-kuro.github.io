@@ -1,4 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Fri, 14 Aug 2020 11:32:01 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>文献阅读：S-ICD与ICD的临床效果评价</title><link>https://aozaki-kuro.com/tech/s-icd-vs-icd/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/s-icd-vs-icd/</guid><pubDate>Fri, 14 Aug 2020 09:44:09 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0000.jpg" alt="ICD-vs-S-ICD">&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki Kuro's Notes, take it easy.</description><generator>Hugo 0.74.3 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki Kuro)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki Kuro)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Sat, 15 Aug 2020 05:28:31 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>文献阅读：脂蛋白(a)作为CVD危险因素</title><link>https://aozaki-kuro.com/tech/lipoproteina-as-cvd-risk-factor/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/lipoproteina-as-cvd-risk-factor/</guid><pubDate>Sat, 15 Aug 2020 11:58:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>文献标题：&lt;strong>Lipoprotein(a) as a cardiovascular risk factor&lt;/strong>&lt;/p>
+&lt;p>文献地址：&lt;a href="https://academic.oup.com/eurheartj/article/31/23/2844/2398484">https://academic.oup.com/eurheartj/article/31/23/2844/2398484&lt;/a>&lt;/p>
+&lt;hr>
+&lt;p>既往研究认为，冠心病的风险与低密度脂蛋白（Low-density lipoprotein cholesterol, LDL-C）密切相关，较高的LDL-C水平更易引发冠心病。&lt;/p>
+&lt;p>针对不同的人群，LDL-C的控制方案和水平各有不同，首先还是复习指南&lt;sup id="fnref:1">&lt;a href="https://aozaki-kuro.com/tech/lipoproteina-as-cvd-risk-factor/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>：&lt;/p>
+&lt;p>&lt;img src="0002.jpg" alt="ASCVD-secondary prevention" title="二级预防">&lt;/p>
+&lt;p>&lt;img src="0001.jpg" alt="ASCVD-secondary prevention" title="一级预防">&lt;/p>
+&lt;p>可以看到指南在二级预防中非常重视LDL-C水平的控制。推荐药物方面除了临床常见的他汀和依折麦布，指南也已经纳入了新药PCSK9-Inhibitor。这些药物都是注重于降低LDL-C的浓度。那么是否具有其他位点，同样可以控制血脂呢？&lt;/p>
+&lt;p>在2010年已有研究指出：脂蛋白(a)与冠心病风险存在关联&lt;sup id="fnref:2">&lt;a href="https://aozaki-kuro.com/tech/lipoproteina-as-cvd-risk-factor/#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>。&lt;/p>
+&lt;p>&lt;img src="0003.jpg" alt="Lp(a)structure" title="Lp(a) 结构，由共价结合的LDL样颗粒和Apo(a)组成">&lt;/p>
+&lt;p>可以看到Lp(a)内同样包含LDL样颗粒，降低Lp(a)可能同样使冠心病患者获益。&lt;/p>
+&lt;p>&lt;img src="0004.jpg" alt="Lp(a)level" title="文中同样提出了Lp(a)的控制水平">&lt;/p>
+&lt;p>但比较遗憾的是，目前尚无专门针对血清Lp(a)水平的药物正式获批，既往常用烟酸对其进行控制。然而烟酸在应用中因其具有扩血管作用，常伴有皮肤潮红、头晕、心动过速、心悸、气短、出汗等等等等副作用，限制了它的临床使用。好消息是，近期发表在NEJM上的一篇文章中采用了靶向肝细胞的反义寡核苷酸AKCEA-APO(a)-L&lt;sub>Rx&lt;/sub>，并发现在Lp(a)升高的冠心病患者中，降低血清Lp(a)含量可显著降低CVD风险&lt;sup id="fnref:3">&lt;a href="https://aozaki-kuro.com/tech/lipoproteina-as-cvd-risk-factor/#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>。&lt;/p>
+&lt;p>&lt;img src="0005.jpg" alt="Lp(a)treated level" title="治疗效果非常不错">&lt;/p>
+&lt;p>这些研究说明：应当在中高危冠心病患者中筛查Lp(a)水平，且已有降低Lp(a)的新药进入临床试验阶段。&lt;/p>
+&lt;p>此外也有研究发现，高危冠心病家族史与Lp(a)可能可以用于联合预测冠心病风险，作出一级预防&lt;sup id="fnref:4">&lt;a href="https://aozaki-kuro.com/tech/lipoproteina-as-cvd-risk-factor/#fn:4" class="footnote-ref" role="doc-noteref">4&lt;/a>&lt;/sup>，将Lp(a)的应用价值再向前推进了一步。&lt;/p>
+&lt;p>&lt;img src="0006.jpg" alt="Lp(a)treated level" title="Lp(a)水平与家族史联合预测冠心病风险">&lt;/p>
+&lt;p>总而言之，脂蛋白(a)是一种可以预测冠心病发生的生物标记物，也是潜在的冠心病治疗靶点；进后需要进一步探索相应的切点，对人群进行冠心病危险分层。&lt;/p>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>Grundy S M, Stone N J, Bailey A L, &lt;em>et al.&lt;/em> Guideline on the management of blood cholesterol: a report of the American College of Cardiology/American heart association Task force on clinical practice guidelines[J]. J Am Coll Cardiol, 2018, 73(24): e285-350. &lt;a href="https://aozaki-kuro.com/tech/lipoproteina-as-cvd-risk-factor/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:2" role="doc-endnote">
+&lt;p>Nordestgaard B G, Chapman M J, Ray K, et al. Lipoprotein (a) as a cardiovascular risk factor: current status[J]. European heart journal, 2010, 31(23): 2844-2853. &lt;a href="https://aozaki-kuro.com/tech/lipoproteina-as-cvd-risk-factor/#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:3" role="doc-endnote">
+&lt;p>Tsimikas S, Karwatowska-Prokopczuk E, Gouni-Berthold I, et al. Lipoprotein (a) reduction in persons with cardiovascular disease[J]. New England Journal of Medicine, 2020, 382(3): 244-255. &lt;a href="https://aozaki-kuro.com/tech/lipoproteina-as-cvd-risk-factor/#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:4" role="doc-endnote">
+&lt;p>Mehta A, Virani S S, Ayers C R, et al. Lipoprotein (a) and family history predict cardiovascular disease risk[J]. Journal of the American College of Cardiology, 2020, 76(7): 781-793. &lt;a href="https://aozaki-kuro.com/tech/lipoproteina-as-cvd-risk-factor/#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></description><category domain="https://aozaki-kuro.com/tech/">tech</category><category domain="https://aozaki-kuro.com/tags/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">文献阅读</category><category domain="https://aozaki-kuro.com/tags/%E6%8A%80%E6%9C%AF/">技术</category></item><item><title>文献阅读：S-ICD与ICD的临床效果评价</title><link>https://aozaki-kuro.com/tech/s-icd-vs-icd/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/s-icd-vs-icd/</guid><pubDate>Fri, 14 Aug 2020 09:44:09 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki Kuro)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0000.jpg" alt="ICD-vs-S-ICD">&lt;/p>
 &lt;p>轮转期间其实收了不少无明显诱因的室颤病人，并在排除相关可逆性原因后选择植入ICD；同样，我也非常关注S-ICD的发展。&lt;/p>
 &lt;p>今天在NEJM上读到最新的S-ICD及ICD疗效评价，故记录下来。&lt;/p>
 &lt;hr>
