@@ -1,4 +1,86 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki's Notes, take it easy.</description><generator>Hugo 0.78.2 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Tue, 24 Nov 2020 03:37:16 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>直播存档的自用方案</title><link>https://aozaki-kuro.com/tech/stream-archiving/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/stream-archiving/</guid><pubDate>Tue, 24 Nov 2020 09:05:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;h2 id="起因">起因&lt;/h2>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki's Notes, take it easy.</description><generator>Hugo 0.78.2 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Tue, 24 Nov 2020 04:13:38 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>Brief Guide of Stream Archiving</title><link>https://aozaki-kuro.com/tech/stream-archiving-eng/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/stream-archiving-eng/</guid><pubDate>Tue, 24 Nov 2020 12:01:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>Due the increase of Sui-chan's out-of-youtube live, &lt;code>youtube-dl&lt;/code> only doesn't meet the need of archiving. Therefore I introduce my own ways to archive the streams.&lt;/p>
+&lt;h2 id="methods">Methods&lt;/h2>
+&lt;h4 id="1-youtube-dl">1. Youtube-dl&lt;/h4>
+&lt;p>&amp;gt;&amp;gt; &lt;a href="https://github.com/ytdl-org/youtube-dl">&lt;strong>Github&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>The famous &lt;code>youtube-dl&lt;/code> is simply the best way to archive streams &lt;strong>after the stream's over&lt;/strong>.&lt;/p>
+&lt;p>If you don't know how to use it, follow these steps.&lt;/p>
+&lt;p>For Windows Enviroment, first add a &lt;code>%PATH%&lt;/code> directory&lt;sup id="fnref:1">&lt;a href="https://aozaki-kuro.com/tech/stream-archiving-eng/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>, also remeber to install &lt;code>aria2c&lt;/code>, &lt;code>ffmpeg&lt;/code>, &lt;code>atomicparsely&lt;/code>, &lt;code>beautifulsoup4&lt;/code> for advanced features.&lt;/p>
+&lt;p>The config file should be at &lt;code>%APPDATA%\youtube-dl\config.txt&lt;/code> or &lt;code>C:\Users\&amp;lt;user name&amp;gt;\youtube-dl.conf&lt;/code>&lt;/p>
+&lt;p>After configuring, open &lt;code>Powershell&lt;/code> or &lt;code>cmd&lt;/code> or &lt;code>Windows Terminal&lt;/code> or whatever you want and type the following&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">youtube-dl &lt;span class="s1">&amp;#39;stream-address&amp;#39;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This is my &lt;code>youtube-dl.conf&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">--external-downloader aria2c --external-downloader-args &lt;span class="s2">&amp;#34;-x 16 -k 1M&amp;#34;&lt;/span> &lt;span class="c1">#aria2c&amp;#39;s settings&lt;/span>
+-o &lt;span class="s1">&amp;#39;C:/Users/&amp;lt;username&amp;gt;/Downloads/%(title)s.%(ext)s&amp;#39;&lt;/span> &lt;span class="c1">#Output file directories and naming&lt;/span>
+--format &lt;span class="s1">&amp;#39;bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio/best&amp;#39;&lt;/span> &lt;span class="c1">#Grab the best resolution available&lt;/span>
+--cookies &lt;span class="s1">&amp;#39;C:/Users/&amp;lt;username&amp;gt;/Downloads/youtube-dl/cookies.txt&amp;#39;&lt;/span> &lt;span class="c1">#use cookies for certain sites&lt;/span>
+--embed-thumbnail &lt;span class="c1">#requires AtomicParsely&lt;/span>
+--add-metadata
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="2-streamlink">2. Streamlink&lt;/h4>
+&lt;p>&amp;gt;&amp;gt; &lt;a href="https://github.com/streamlink/streamlink">&lt;strong>Github&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>Since &lt;code>youtube-dl&lt;/code> can only download the archive only after the stream ended, it won't work for these none-archive streams.&lt;/p>
+&lt;p>I suggest &lt;code>streamlink&lt;/code>. It's also pretty easy to use.&lt;/p>
+&lt;p>After installing &lt;code>streamlink&lt;/code> and &lt;code>Python&lt;/code>, just type:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">streamlink &lt;span class="s1">&amp;#39;stream-address&amp;#39;&lt;/span> best -o &lt;span class="s1">&amp;#39;outputfile&amp;#39;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The &lt;code>'outputfile'&lt;/code> could be replaced by a path like &lt;code>D:\videos\20201124.mp4&lt;/code>&lt;/p>
+&lt;p>&lt;code>Streamlink&lt;/code> claimed to be also able to record both &lt;code>nicolive&lt;/code> and &lt;code>nicolive timeshift&lt;/code>, but I'm not sure if the recording will interfere with watching.&lt;/p>
+&lt;p>If you want to record &lt;code>nicolive&lt;/code>, you will need addtional settings:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">streamlink &lt;span class="s1">&amp;#39;stream-address&amp;#39;&lt;/span> best -o &lt;span class="s1">&amp;#39;outputfile&amp;#39;&lt;/span> --niconico-email &lt;span class="s1">&amp;#39;EMAIL&amp;#39;&lt;/span> --niconico-password &lt;span class="s1">&amp;#39;PASSWORD&amp;#39;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="3-stream-recorder">3. Stream Recorder&lt;/h4>
+&lt;p>&amp;gt;&amp;gt; &lt;a href="https://chrome.google.com/webstore/detail/stream-recorder-download/iogidnfllpdhagebkblkgbfijkbkjdmm">&lt;strong>Chrome Store&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>This is a plugin which can directly grab the stream. It did a great job in the &lt;strong>SUISEI &amp;quot;POWER&amp;quot; LIVE&lt;/strong>. I successfully saved the live-record edition using this plugin.&lt;/p>
+&lt;p>The details were written in the plugin, &lt;strong>read before use&lt;/strong>.&lt;/p>
+&lt;p>But it might be a little bit unstable. You might have to refresh and grab for several times until you see the higher resolution.&lt;/p>
+&lt;p>And it does not work with &lt;code>YouTube&lt;/code>, so you still need &lt;code>streamlink&lt;/code>.&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>These three methods were running in Windows Enviroment and worked fluently for me, as long as the network speed doesn't bottleneck.&lt;/p>
+&lt;p>If having any questions, read the documents on Github first.&lt;/p>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>If you are not sure about how to add a &lt;code>%PATH%&lt;/code>, &lt;a href="https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/">click here&lt;/a> &lt;a href="https://aozaki-kuro.com/tech/stream-archiving-eng/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></description><category domain="https://aozaki-kuro.com/tech/">tech</category></item><item><title>直播存档的自用方案</title><link>https://aozaki-kuro.com/tech/stream-archiving/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/stream-archiving/</guid><pubDate>Tue, 24 Nov 2020 09:05:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;h2 id="起因">起因&lt;/h2>
 &lt;p>自从Hololive 7月版权事件造成旗下VTuber大量视频遭到隐藏，Suisei Channel也并不能幸免。甚至包括早期大量杂谈及歌回视频也遭到隐藏。&lt;/p>
 &lt;p>雪上加霜的是，先前仰赖的直播存档站于&lt;code>2020-10-31&lt;/code>宣布进入只读状态，不再写入新的直播存档，导致一时间难以应对。&lt;/p>
 &lt;p>此外，&lt;code>2020-11-23&lt;/code>星街的歌回疑似再次因为唱了米津玄師的感電，导致存档暂时隐藏，截至&lt;code>2020-11-24 09:00 UTC+8&lt;/code>，存档尚未恢复，仰仗他人保住了存档。&lt;/p>
@@ -36,7 +118,7 @@
 &lt;pre class="chroma">&lt;code class="language-sh" data-lang="sh">--external-downloader aria2c --external-downloader-args &lt;span class="s2">&amp;#34;--all-proxy=http://127.0.0.1:7890 -x 16 -k 1M&amp;#34;&lt;/span>
 -o &lt;span class="s1">&amp;#39;C:/Users/&amp;lt;username&amp;gt;/Downloads/%(title)s.%(ext)s&amp;#39;&lt;/span>
 --format &lt;span class="s1">&amp;#39;bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio/best&amp;#39;&lt;/span>
---cookies &lt;span class="s1">&amp;#39;C:/Users/nihan/Downloads/youtube-dl/cookies.txt&amp;#39;&lt;/span>
+--cookies &lt;span class="s1">&amp;#39;C:/Users/&amp;lt;username&amp;gt;/Downloads/youtube-dl/cookies.txt&amp;#39;&lt;/span>
 --embed-thumbnail
 --add-metadata
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
