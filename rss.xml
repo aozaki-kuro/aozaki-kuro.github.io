@@ -1,4 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki's Notes, take it easy.</description><generator>Hugo 0.78.2 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Mon, 16 Nov 2020 00:27:36 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>记录一个诡异梦境</title><link>https://aozaki-kuro.com/life/a-weired-bad-dream/</link><guid isPermaLink="true">https://aozaki-kuro.com/life/a-weired-bad-dream/</guid><pubDate>Mon, 16 Nov 2020 08:10:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>梦里我生活在一个阴雨不断的城市里，很像上海老城区，又有点像巴黎。梦里我的职业似乎也是医生，某一天在家接到一封信，要我调查一个人的死因。我端详许久，感觉字迹非常熟悉却有说不出是谁的，发现信封上根本没有邮票，更没有地址无法判断信件是从哪里寄来的。为了一探究竟，便拿上了箱子和背包出门探访了。&lt;/p>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki's Notes, take it easy.</description><generator>Hugo 0.78.2 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Tue, 24 Nov 2020 01:58:29 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>直播存档的自用方案</title><link>https://aozaki-kuro.com/tech/stream-archiving/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/stream-archiving/</guid><pubDate>Tue, 24 Nov 2020 09:05:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;h2 id="起因">起因&lt;/h2>
+&lt;p>自从Hololive 7月版权事件造成旗下VTuber大量视频遭到隐藏，Suisei Channel也并不能幸免。甚至包括早期大量杂谈及歌回视频也遭到隐藏。&lt;/p>
+&lt;p>雪上加霜的是，先前仰赖的直播存档站于&lt;code>2020-10-31&lt;/code>宣布进入只读状态，不再写入新的直播存档，导致一时间难以应对。&lt;/p>
+&lt;p>此外，&lt;code>2020-11-23&lt;/code>星街的歌回疑似再次因为唱了米津玄師的感電，导致存档暂时隐藏，截至&lt;code>2020-11-24 09:00 UTC+8&lt;/code>，存档尚未恢复，仰仗他人保住了存档。&lt;/p>
+&lt;p>因此痛定思痛，准备了一些方案应对将来可能出现的不留档等问题。&lt;/p>
+&lt;h2 id="解决方案">解决方案&lt;/h2>
+&lt;p>由于我并没有太多程序基础，也没有太多精力去折腾一整套的云端存档方案，因此整体暂时以Windows的本地操作为主。&lt;/p>
+&lt;h4 id="youtube-dl">youtube-dl&lt;/h4>
+&lt;p>&lt;a href="https://github.com/ytdl-org/youtube-dl">&lt;strong>项目主页点此&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>大名鼎鼎的&lt;code>youtube-dl&lt;/code>，可以说是各类视频站批量存储的最佳方案，有名到甚至吃了RIAA的DMCA Takedown，不过在折腾之后Github恢复了项目&lt;sup id="fnref:1">&lt;a href="https://aozaki-kuro.com/tech/stream-archiving/#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/p>
+&lt;p>Windows环境下配置好后输入&lt;code>youtube-dl &amp;lt;stream-address&amp;gt;&lt;/code>即可。&lt;/p>
+&lt;p>配置文件在&lt;code>%APPDATA%\youtube-dl\config.txt&lt;/code>或&lt;code>C:\Users\&amp;lt;user name&amp;gt;\youtube-dl.conf&lt;/code>&lt;/p>
+&lt;p>贴一下我的配置文件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">--external-downloader aria2c --external-downloader-args &lt;span class="s2">&amp;#34;--all-proxy=http://127.0.0.1:7890 -x 16 -k 1M&amp;#34;&lt;/span>
+-o &lt;span class="s1">&amp;#39;C:/Users/&amp;lt;username&amp;gt;/Downloads/%(title)s.%(ext)s&amp;#39;&lt;/span>
+--format &lt;span class="s1">&amp;#39;bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio/best&amp;#39;&lt;/span>
+--cookies &lt;span class="s1">&amp;#39;C:/Users/nihan/Downloads/youtube-dl/cookies.txt&amp;#39;&lt;/span>
+--embed-thumbnail
+--add-metadata
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这里需要用到的依赖包括&lt;code>aria2c&lt;/code>,&lt;code>ffmpeg&lt;/code>,&lt;code>atomicparsely&lt;/code>,&lt;code>beautifulsoup4&lt;/code>&lt;/p>
+&lt;p>优点&lt;/p>
+&lt;ol>
+&lt;li>批量操作，可对整个频道的视频/播放列表进行拉取&lt;/li>
+&lt;li>支持多种视频站点（具体参考项目主页说明）&lt;/li>
+&lt;li>更新快，能够很好应对YouTube的频繁改动&lt;/li>
+&lt;/ol>
+&lt;p>缺点：&lt;/p>
+&lt;ol>
+&lt;li>只能单线程下载，待YouTube转码完成后才能利用&lt;code>aria2c&lt;/code>进行多线程下载&lt;/li>
+&lt;li>必须在&lt;strong>直播结束&lt;/strong>后才能进行下载&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>youtube-dl&lt;/code>尽管解决了批量下载的问题，但是没有解决直播时直接对串流进行保存的问题。由于星街的歌回通常是留档的，因此以前都没有太多研究。在遭遇到&lt;code>2020-11-23&lt;/code>直播存档神隐后这一需求自然也提上了议事日程。&lt;/p>
+&lt;h4 id="streamlink">Streamlink&lt;/h4>
+&lt;p>&lt;a href="https://github.com/streamlink/streamlink">&lt;strong>项目主页点此&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>又一个大名鼎鼎的项目，原本常用于将直播串流至本地播放器播放，不过查阅文档后发现，&lt;code>streamlink&lt;/code>同样具有输出至文件的能力。&lt;/p>
+&lt;p>我通过&lt;code>chocolatey&lt;/code>安装后，开箱即用。&lt;/p>
+&lt;p>&lt;code>streamlink &amp;lt;stream-address&amp;gt; best -o &amp;lt;outputfile&amp;gt;&lt;/code>&lt;/p>
+&lt;p>本地环境测试通过，并无明显的卡顿。依照项目说法，它甚至支持&lt;code>nicolive&lt;/code>以及&lt;code>nicolive timeshift&lt;/code>；但根据既往经验，&lt;code>nicolive&lt;/code>对于多设备登录并不友好，所以是否应当使用该项目对接下来的付费Live进行保存，这点需要进一步验证。&lt;/p>
+&lt;h4 id="stream-recorder">Stream Recorder&lt;/h4>
+&lt;p>&lt;a href="https://chrome.google.com/webstore/detail/stream-recorder-download/iogidnfllpdhagebkblkgbfijkbkjdmm">&lt;strong>插件地址点此&lt;/strong>&lt;/a>&lt;/p>
+&lt;p>一个直接从浏览器内即可捕获直播流的插件。目前使用感良好，包括截存&lt;code>nicolive&lt;/code>并未引发登录冲突的问题。&lt;/p>
+&lt;p>&lt;code>2020-11-23&lt;/code> 日清主办的SUISEI &amp;quot;POWER&amp;quot; LIVE中这个插件大显身手。&lt;/p>
+&lt;p>所有人都没想到日清的直播站点发布的直播存档，最后输出的色域出错，音质及码率均出现了不同程度的下降，对于观感影响明显。完全一时兴起对全场串流进行保存的我手里的存档成了整个discord服务器的希望…&lt;/p>
+&lt;p>唯一问题，不能用于&lt;code>YouTube&lt;/code>直播串流保存，因此仍然需要&lt;code>streamlink&lt;/code>。&lt;/p>
+&lt;h2 id="to-do">To-Do&lt;/h2>
+&lt;p>由于这些方案目前均是基于本地运行的，自动化程度非常低，且存在遗漏风险、占用本地带宽、卡顿造成串流失败等等问题。因此在寻求各类云端自动化解决方案。&lt;/p>
+&lt;p>一方面看中了Amazon Lightsail的3.5 USD/month方案，另一方面正在查看是否有全套的监测、录制、上传至网盘的方案，如果有更新，会追加在后面。&lt;/p>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>事件全貌及Github的回应：&lt;a href="https://github.blog/2020-11-16-standing-up-for-developers-youtube-dl-is-back/">https://github.blog/2020-11-16-standing-up-for-developers-youtube-dl-is-back/&lt;/a> &lt;a href="https://aozaki-kuro.com/tech/stream-archiving/#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></description><category domain="https://aozaki-kuro.com/tech/">tech</category><category domain="https://aozaki-kuro.com/tags/%E4%BB%93%E9%BC%A0%E7%97%87/">仓鼠症</category><category domain="https://aozaki-kuro.com/tags/%E7%BD%91%E7%BB%9C/">网络</category></item><item><title>记录一个诡异梦境</title><link>https://aozaki-kuro.com/life/a-weired-bad-dream/</link><guid isPermaLink="true">https://aozaki-kuro.com/life/a-weired-bad-dream/</guid><pubDate>Mon, 16 Nov 2020 08:10:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>梦里我生活在一个阴雨不断的城市里，很像上海老城区，又有点像巴黎。梦里我的职业似乎也是医生，某一天在家接到一封信，要我调查一个人的死因。我端详许久，感觉字迹非常熟悉却有说不出是谁的，发现信封上根本没有邮票，更没有地址无法判断信件是从哪里寄来的。为了一探究竟，便拿上了箱子和背包出门探访了。&lt;/p>
 &lt;p>首先是在家附近左邻右舍询问是否知晓是谁送来的信，但是邻居们表示十几年没有人寄过信了，更不可能知道是谁送来了这封神秘信件。&lt;/p>
 &lt;p>调查过程并不顺利。凭着信上那一点零碎的信息，我连死者的基本信息掌握都不全，更别说侧写和找到死者生前生活在哪里。翻过信件后发现还有一张指向更老旧城区的简易地图，于是我决定坐有轨电车向那里进发。&lt;/p>
 &lt;p>在电车上我不断反复翻看这封信：字迹熟悉，信息零碎，没有署名。尽管信件这么可疑，我却觉得内容是可信的，并坚定了调查下去的决心。&lt;/p>
@@ -567,7 +638,7 @@ PxDownloader/&lt;span class="si">${&lt;/span>&lt;span class="nv">userName&lt;/sp
 &lt;p>所以最后放弃了&lt;code>tags&lt;/code>分类的想法。&lt;/p>
 &lt;h2 id="总结">总结&lt;/h2>
 &lt;p>重构图库的结果是并轨制，以少量文件夹浏览速度为牺牲，提升了准确度。&lt;/p>
-&lt;p>如果有能够结合Booru和Plex的优秀的&lt;code>tags&lt;/code>管理方法，请务必告诉我。&lt;/p></description><category domain="https://aozaki-kuro.com/tech/">tech</category><category domain="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/">折腾</category><category domain="https://aozaki-kuro.com/tags/%E5%BC%BA%E8%BF%AB%E7%97%87/">强迫症</category><category domain="https://aozaki-kuro.com/tags/%E6%95%B4%E7%90%86%E7%99%96/">整理癖</category><category domain="https://aozaki-kuro.com/tags/%E4%BB%93%E9%BC%A0%E7%97%87%E6%82%A3%E8%80%85/">仓鼠症患者</category></item><item><title>利用Github Action自动化部署Hugo</title><link>https://aozaki-kuro.com/tech/deploying-hugo-with-github-actions/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/deploying-hugo-with-github-actions/</guid><pubDate>Mon, 10 Aug 2020 18:04:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0001.jpg" alt="">&lt;/p>
+&lt;p>如果有能够结合Booru和Plex的优秀的&lt;code>tags&lt;/code>管理方法，请务必告诉我。&lt;/p></description><category domain="https://aozaki-kuro.com/tech/">tech</category><category domain="https://aozaki-kuro.com/tags/%E6%8A%98%E8%85%BE/">折腾</category><category domain="https://aozaki-kuro.com/tags/%E5%BC%BA%E8%BF%AB%E7%97%87/">强迫症</category><category domain="https://aozaki-kuro.com/tags/%E6%95%B4%E7%90%86%E7%99%96/">整理癖</category><category domain="https://aozaki-kuro.com/tags/%E4%BB%93%E9%BC%A0%E7%97%87/">仓鼠症</category></item><item><title>利用Github Action自动化部署Hugo</title><link>https://aozaki-kuro.com/tech/deploying-hugo-with-github-actions/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/deploying-hugo-with-github-actions/</guid><pubDate>Mon, 10 Aug 2020 18:04:51 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0001.jpg" alt="">&lt;/p>
 &lt;p>先前抱怨过Hugo本地编译再&lt;code>git push&lt;/code>至远端的操作过于繁琐，今天发现可以通过Github Action实现对Hugo的自动化部署并实践成功，故记录折腾过程。&lt;/p>
 &lt;p>此处应有 从各种意义上来讲这玩意太他妈邪门.jpg&lt;/p>
 &lt;p>总之因为各种教程都有点语焉不详，于是还是自己把傻瓜化的过程记录下来得了。&lt;/p>
