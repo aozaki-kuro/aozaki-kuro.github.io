@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki's Notes, take it easy.</description><generator>Hugo 0.78.2 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Tue, 24 Nov 2020 04:13:38 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>Brief Guide of Stream Archiving</title><link>https://aozaki-kuro.com/tech/stream-archiving-eng/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/stream-archiving-eng/</guid><pubDate>Tue, 24 Nov 2020 12:01:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;h2 id="introduction">Introduction&lt;/h2>
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Aozaki's Note</title><link>https://aozaki-kuro.com/</link><description>Aozaki's Notes, take it easy.</description><generator>Hugo 0.79.0 https://gohugo.io/</generator><language>zh-CN</language><managingEditor>Aozaki.Kuro@gmail.com (Aozaki)</managingEditor><webMaster>Aozaki.Kuro@gmail.com (Aozaki)</webMaster><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><lastBuildDate>Sat, 19 Dec 2020 07:43:52 +0000</lastBuildDate><atom:link rel="self" type="application/rss+xml" href="https://aozaki-kuro.com/rss.xml"/><item><title>Brief Guide of Stream Archiving</title><link>https://aozaki-kuro.com/tech/stream-archiving-eng/</link><guid isPermaLink="true">https://aozaki-kuro.com/tech/stream-archiving-eng/</guid><pubDate>Tue, 24 Nov 2020 12:01:50 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;h2 id="introduction">Introduction&lt;/h2>
 &lt;p>Due the increase of Sui-chan's out-of-youtube live, &lt;code>youtube-dl&lt;/code> only doesn't meet the need of archiving. Therefore I introduce my own ways to archive the streams.&lt;/p>
 &lt;h2 id="methods">Methods&lt;/h2>
 &lt;h4 id="1-youtube-dl">1. Youtube-dl&lt;/h4>
@@ -1123,7 +1123,7 @@ git push
 &lt;img src="0006.jpg" alt="">&lt;/p>
 &lt;hr>
 &lt;div style="text-align: center;">
-Copyright © 2014-2020 Aozaki, All rights reserved.
+Copyright © 2019 Aozaki, All rights reserved.
 &lt;/div></description><category domain="https://aozaki-kuro.com/portfolio/">portfolio</category><category domain="https://aozaki-kuro.com/tags/portfolio/">Portfolio</category><category domain="https://aozaki-kuro.com/tags/the_surreal_series/">The_Surreal_Series</category></item><item><title>The Surreal Series: Unbalance</title><link>https://aozaki-kuro.com/portfolio/the-surreal-series-06/</link><guid isPermaLink="true">https://aozaki-kuro.com/portfolio/the-surreal-series-06/</guid><pubDate>Fri, 15 Jul 2016 10:07:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0001.jpg" alt="">
 &lt;img src="0002.jpg" alt="">
 &lt;img src="0003.jpg" alt="">
@@ -1135,19 +1135,19 @@ Copyright © 2014-2020 Aozaki, All rights reserved.
 &lt;img src="0009.jpg" alt="">&lt;/p>
 &lt;hr>
 &lt;div style="text-align: center;">
-Copyright © 2014-2020 Aozaki, All rights reserved.
+Copyright © 2016 Aozaki, All rights reserved.
 &lt;/div></description><category domain="https://aozaki-kuro.com/portfolio/">portfolio</category><category domain="https://aozaki-kuro.com/tags/portfolio/">Portfolio</category><category domain="https://aozaki-kuro.com/tags/the_surreal_series/">The_Surreal_Series</category></item><item><title>The Portrait Series: Origami</title><link>https://aozaki-kuro.com/portfolio/the-portrait-series-02/</link><guid isPermaLink="true">https://aozaki-kuro.com/portfolio/the-portrait-series-02/</guid><pubDate>Thu, 05 May 2016 08:07:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0001.jpg" alt="">
 &lt;img src="0002.jpg" alt="">&lt;/p>
 &lt;hr>
 &lt;div style="text-align: center;">
-Copyright © 2014-2020 Aozaki, All rights reserved.
+Copyright © 2016 Aozaki, All rights reserved.
 &lt;/div></description><category domain="https://aozaki-kuro.com/portfolio/">portfolio</category><category domain="https://aozaki-kuro.com/tags/portfolio/">Portfolio</category><category domain="https://aozaki-kuro.com/tags/the_portrait/">The_Portrait</category></item><item><title>The Surreal Series: Awareness</title><link>https://aozaki-kuro.com/portfolio/the-surreal-series-05/</link><guid isPermaLink="true">https://aozaki-kuro.com/portfolio/the-surreal-series-05/</guid><pubDate>Wed, 25 Nov 2015 10:07:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0002.jpg" alt="">
 &lt;img src="0003.jpg" alt="">
 &lt;img src="0001.jpg" alt="">
 &lt;img src="0004.jpg" alt="">&lt;/p>
 &lt;hr>
 &lt;div style="text-align: center;">
-Copyright © 2014-2020 Aozaki, All rights reserved.
+Copyright © 2015 Aozaki, All rights reserved.
 &lt;/div></description><category domain="https://aozaki-kuro.com/portfolio/">portfolio</category><category domain="https://aozaki-kuro.com/tags/portfolio/">Portfolio</category><category domain="https://aozaki-kuro.com/tags/the_surreal_series/">The_Surreal_Series</category></item><item><title>The Surreal Series: Refusal</title><link>https://aozaki-kuro.com/portfolio/the-surreal-series-04/</link><guid isPermaLink="true">https://aozaki-kuro.com/portfolio/the-surreal-series-04/</guid><pubDate>Sun, 26 Jul 2015 10:07:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0008.jpg" alt="">
 &lt;img src="0002.jpg" alt="">
 &lt;img src="0001.jpg" alt="">
@@ -1157,7 +1157,7 @@ Copyright © 2014-2020 Aozaki, All rights reserved.
 &lt;img src="0006.jpg" alt="">&lt;/p>
 &lt;hr>
 &lt;div style="text-align: center;">
-Copyright © 2014-2020 Aozaki, All rights reserved.
+Copyright © 2015 Aozaki, All rights reserved.
 &lt;/div></description><category domain="https://aozaki-kuro.com/portfolio/">portfolio</category><category domain="https://aozaki-kuro.com/tags/portfolio/">Portfolio</category><category domain="https://aozaki-kuro.com/tags/the_surreal_series/">The_Surreal_Series</category></item><item><title>The Surreal Series: Regret</title><link>https://aozaki-kuro.com/portfolio/the-surreal-series-03/</link><guid isPermaLink="true">https://aozaki-kuro.com/portfolio/the-surreal-series-03/</guid><pubDate>Sun, 29 Mar 2015 10:07:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0001.jpg" alt="">
 &lt;img src="0002.jpg" alt="">
 &lt;img src="0003.jpg" alt="">
@@ -1170,7 +1170,7 @@ Copyright © 2014-2020 Aozaki, All rights reserved.
 &lt;img src="0010.jpg" alt="">&lt;/p>
 &lt;hr>
 &lt;div style="text-align: center;">
-Copyright © 2014-2020 Aozaki, All rights reserved.
+Copyright © 2015 Aozaki, All rights reserved.
 &lt;/div></description><category domain="https://aozaki-kuro.com/portfolio/">portfolio</category><category domain="https://aozaki-kuro.com/tags/portfolio/">Portfolio</category><category domain="https://aozaki-kuro.com/tags/the_surreal_series/">The_Surreal_Series</category></item><item><title>The Portrait Series: Blossom</title><link>https://aozaki-kuro.com/portfolio/the-portrait-series-01/</link><guid isPermaLink="true">https://aozaki-kuro.com/portfolio/the-portrait-series-01/</guid><pubDate>Mon, 09 Feb 2015 08:07:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0001.jpg" alt="">
 &lt;img src="0002.jpg" alt="">
 &lt;img src="0003.jpg" alt="">
@@ -1181,7 +1181,7 @@ Copyright © 2014-2020 Aozaki, All rights reserved.
 &lt;img src="0008.jpg" alt="">&lt;/p>
 &lt;hr>
 &lt;div style="text-align: center;">
-Copyright © 2014-2020 Aozaki, All rights reserved.
+Copyright © 2015 Aozaki, All rights reserved.
 &lt;/div></description><category domain="https://aozaki-kuro.com/portfolio/">portfolio</category><category domain="https://aozaki-kuro.com/tags/portfolio/">Portfolio</category><category domain="https://aozaki-kuro.com/tags/the_portrait/">The_Portrait</category></item><item><title>The Surreal Series: Funernal</title><link>https://aozaki-kuro.com/portfolio/the-surreal-series-02/</link><guid isPermaLink="true">https://aozaki-kuro.com/portfolio/the-surreal-series-02/</guid><pubDate>Tue, 27 May 2014 09:07:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0001.jpg" alt="">
 &lt;img src="0002.jpg" alt="">
 &lt;img src="0003.jpg" alt="">
@@ -1191,7 +1191,7 @@ Copyright © 2014-2020 Aozaki, All rights reserved.
 &lt;img src="0008.jpg" alt="">&lt;/p>
 &lt;hr>
 &lt;div style="text-align: center;">
-Copyright © 2014-2020 Aozaki, All rights reserved.
+Copyright © 2014 Aozaki, All rights reserved.
 &lt;/div></description><category domain="https://aozaki-kuro.com/portfolio/">portfolio</category><category domain="https://aozaki-kuro.com/tags/portfolio/">Portfolio</category><category domain="https://aozaki-kuro.com/tags/the_surreal_series/">The_Surreal_Series</category></item><item><title>The Surreal Series: Memorial</title><link>https://aozaki-kuro.com/portfolio/the-surreal-series-01/</link><guid isPermaLink="true">https://aozaki-kuro.com/portfolio/the-surreal-series-01/</guid><pubDate>Thu, 27 Mar 2014 08:07:00 +0800</pubDate><author>Aozaki.Kuro@gmail.com (Aozaki)</author><copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright><description>&lt;p>&lt;img src="0001.jpg" alt="">
 &lt;img src="0002.jpg" alt="">
 &lt;img src="0003.jpg" alt="">
@@ -1201,5 +1201,5 @@ Copyright © 2014-2020 Aozaki, All rights reserved.
 &lt;img src="0007.jpg" alt="">&lt;/p>
 &lt;hr>
 &lt;div style="text-align: center;">
-Copyright © 2014-2020 Aozaki, All rights reserved.
+Copyright © 2014 Aozaki, All rights reserved.
 &lt;/div></description><category domain="https://aozaki-kuro.com/portfolio/">portfolio</category><category domain="https://aozaki-kuro.com/tags/portfolio/">Portfolio</category><category domain="https://aozaki-kuro.com/tags/the_surreal_series/">The_Surreal_Series</category></item></channel></rss>
