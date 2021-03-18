@@ -1,4 +1,4 @@
-# The Surreal Series: Funernal
+# The Surreal Series 02: Funernal
 
 
 ![](0001.jpg)
@@ -9,6 +9,3 @@
 ![](0006.jpg)
 ![](0008.jpg)
 
-***
-
-Copyright © 2014 Aozaki, All rights reserved.

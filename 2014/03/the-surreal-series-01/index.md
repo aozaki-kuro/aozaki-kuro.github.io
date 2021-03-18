@@ -1,4 +1,4 @@
-# The Surreal Series: Memorial
+# The Surreal Series 01: Memorial
 
 
 ![](0001.jpg)
@@ -9,6 +9,3 @@
 ![](0006.jpg)
 ![](0007.jpg)
 
-***
-
-Copyright © 2014 Aozaki, All rights reserved.

@@ -1,4 +1,4 @@
-# The Surreal Series: Regret
+# The Surreal Series 03: Regret
 
 
 ![](0001.jpg)
@@ -12,6 +12,3 @@
 ![](0009.jpg)
 ![](0010.jpg)
 
-***
-
-Copyright © 2015 Aozaki, All rights reserved.

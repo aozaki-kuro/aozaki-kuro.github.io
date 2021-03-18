@@ -1,4 +1,4 @@
-# The Surreal Series: Refusal
+# The Surreal Series 04: Refusal
 
 
 ![](0008.jpg)
@@ -9,6 +9,3 @@
 ![](0005.jpg)
 ![](0006.jpg)
 
-***
-
-Copyright © 2015 Aozaki, All rights reserved.

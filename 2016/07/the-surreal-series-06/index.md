@@ -1,4 +1,4 @@
-# The Surreal Series: Unbalance
+# The Surreal Series 06: Unbalance
 
 
 ![](0001.jpg)
@@ -11,6 +11,3 @@
 ![](0008.jpg)
 ![](0009.jpg)
 
-***
-
-Copyright © 2016 Aozaki, All rights reserved.
